@@ -42,7 +42,7 @@
 }
 
 .graph {
-    margin: 0 auto;
+    margin: 0 auto;  /* met le grpah au centre */
     width: 800px;
     height: 800px;
     border-radius: 3px;
