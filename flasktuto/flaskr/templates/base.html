@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<html>
+    <meta charset="utf-8">
+    <!-- Side navigation -->
+    <div class="sidenav">
+        <div class="logo"></div>
+        <br>
+        <a href="home">Home</a>
+        <a href="about">About</a>
+    </div>
+
+    <!-- Image de la vache + le titre -->
+    <div class="main">
+        <!--<img src="https://s1.best-wallpaper.net/wallpaper/m/1511/Cow-head-face_m.webp" alt="Une jolie vache">-->
+        <div class="bgcow">
+            <div class="titre">
+                <span class="border"> LA FERME DES 3 CHENES</span>
+            </div>
+    </div>
+
+    <!-- Page content -->
+    {% block content %}{% endblock %}
+
+    </html>
