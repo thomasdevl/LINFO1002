@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <!-- Side navigation -->
     <div class="sidenav">
+        <div class="logo"></div>
         <a href="home">Home</a>
         <a href="about">About</a>
     </div>
@@ -11,34 +12,40 @@
     <!-- Page content -->
     <div class="main">
         <!--<img src="https://s1.best-wallpaper.net/wallpaper/m/1511/Cow-head-face_m.webp" alt="Une jolie vache">-->
+        <div class="bgcow">
+            <div class="titre">
+                <span class="border"> LA FERME DES ...</span>
+            </div>
+        </div>
+        
+        <div class="info"> <p>hjiobvevgip eiç eoie hgoàieh oàge à gherà </p></div>
         <body>
-            <div class="img-vache"></div>
-            <h1>Home page</h1>
-
-        <p>graph test</p>
-
+        
+    
         <!-- Chargement de la librairie Javascript à utiliser -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
         <h2> <center><u>Graphe</u> </center></h2>
-   
-        <canvas id="graphique" width="100px" height="100px"</canvas>
-        <script>
-         // l'identifiant est celui du canevas
-        var ctx = document.getElementById('graphique').getContext('2d');
-         // création du graphique
-         var myChart = new Chart(ctx, {
-        type: 'radar',   // le type du graphique
-        data: {        // les données
-          labels: ['Jean', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique','thomas le beau gosse','JEAN'],
-          datasets: [{
-                      label: 'votes',
-                      data: [12, 19, 3, 5, 2, 3,50,20]
-                     }]
-           }
-           }
-     );
-        </script>
         
+        <div class = "graph"> 
+            <canvas id="graphique" width="100px" height="100px"</canvas>
+                <script>
+                 // l'identifiant est celui du canevas
+                var ctx = document.getElementById('graphique').getContext('2d');
+                 // création du graphique
+                 var myChart = new Chart(ctx, {
+                type: 'radar',   // le type du graphique
+                data: {        // les données
+                  labels: ['Jean', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique','thomas le beau gosse','JEAN'],
+                  datasets: [{
+                              label: 'votes',
+                              data: [12, 19, 3, 5, 2, 3,50,20]
+                             }]
+                   }
+                   }
+             );
+                </script> </div>
+       
+    
     </body>
   </div>
 
