@@ -10,39 +10,80 @@
     background-color: #111; /* Black */
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 20px;
-  }
+}
   
-  /* The navigation menu links */
-  .sidenav a {
+/* The navigation menu links */
+.sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
     display: block;
-  }
+}
   
-  /* When you mouse over the navigation links, change their color */
-  .sidenav a:hover {
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
     color: #f1f1f1;
-  }
+}
+
+.logo{
+    margin: 0 auto;  /* met le graph au centre */
+    width: 100px;
+    height: 100px;
+    background-image: url(https://img.freepik.com/free-vector/happy-cow-logo-mascot-template_190190-122.jpg?w=826);
+    background-size: 100%;
+    border-radius: 50%;
+}
   
-  /* Style page content */
-  .main {
+/* Style page content */
+.main {
     font-family: Calibri;
     margin-left: 160px; /* Same as the width of the sidebar */
     padding: 0px 10px;
-  }
-  
-
-.img-vache {
- width: auto;
- height: 200px;
- background-image: url(https://s1.best-wallpaper.net/wallpaper/m/1511/Cow-head-face_m.webp);
- background-size: 50%;
+    height: 100%;
+    margin: 0;
 }
 
+body, html {
+    height: 100%;
+    margin: 0;
+}
+  
+
+.bgcow {
+  background-image: url("https://s1.best-wallpaper.net/wallpaper/m/1511/Cow-head-face_m.webp");
+  height: 25%; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.titre{
+    position: absolute;
+    left: 0;
+    top: 10%;
+    width: 100%;
+    text-align: center;
+    color: #000;
+    display: block;
+}
+
+.titre span.border {
+    background-color: #111;
+    color: #fff;
+    padding: 18px;
+    font-size: 25px;
+    letter-spacing: 10px;
+}
+
+.info{
+    font-family: sans-serif;
+    margin-left: 160px;
+}
+
+
 .graph {
-    margin: 0 auto;  /* met le grpah au centre */
+    margin: 0 auto;  /* met le graph au centre */
     width: 800px;
     height: 800px;
     border-radius: 3px;
