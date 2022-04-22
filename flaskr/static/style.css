@@ -48,6 +48,10 @@ body, html {
     height: 100%;
     margin: 0;
 }
+
+body{
+    margin-left: 160px;   /* tt décalé pour pas être sous la barre de navigation */
+}
   
 
 .bgcow {
@@ -78,7 +82,6 @@ body, html {
 
 .info{
     font-family: sans-serif;
-    margin-left: 160px;
 }
 
 
@@ -87,4 +90,5 @@ body, html {
     width: 800px;
     height: 800px;
     border-radius: 3px;
+     
 }
