@@ -1,3 +1,4 @@
+
 CREATE TABLE [animaux] (
     [id] INT PRIMARY KEY     NOT NULL,
     [famille_id]  INT        NOT NULL,
