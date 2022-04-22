@@ -69,7 +69,7 @@ body, html {
 }
 
 .titre span.border {
-    background-color: #111;
+    background-color: rgba(90, 79, 79, 0.56);
     color: #fff;
     padding: 18px;
     font-size: 25px;
@@ -83,7 +83,7 @@ body, html {
 
 
 .graph {
-    margin: 0 auto;  /* met le graph au centre */
+    margin: 0 auto;  /* met le grh au centre */
     width: 800px;
     height: 800px;
     border-radius: 3px;
