@@ -9,42 +9,77 @@
             The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham</p>
         </div>
         
-        <div class = "button">
-            <form>
-                <select name = "dropdown">
-                <option value = "taj" selected>Taj Mahal</option>
-                <option value = "china">Great Wall of China</option>
-                <option value = "chirst" required>Christ the Redeemer Satue</option>
-                <option value = "machu" disabled>Machu Picchu</option>
-                <option value = "chichen">Chichen Itza</option>
-                <option value = "colossem">The Roman Colosseum</option>
-                <option value = "petra">Petra</option>
-                </select>
-            </form>
-        </div>
-
-    <!-- Chargement de la librairie Javascript à utiliser -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+        
     <h2> <center><u>Graphe</u> </center></h2>
         
     <div class = "graph"> 
+        <div class="flex">
+        
+            <div class="Type">
+                <nav>
+                    <ul>
+                        <li class ="deroulant"><a href="#">Type &ensp;</a>
+                            <ul class="sous">
+                                <li><a href="#" title="bar" onclick="updatetype_graph('bar')">bar</a></li>
+
+                                <li><a href="#" title="radar" onclick="updatetype_graph('radar')">Radar</a></li>
+
+                                <li><a href="#" title="polarArea" onclick="updatetype_graph('polarArea')">PolarArea</a></li>
+
+                                <li><a href="#" title="pie" onclick="updatetype_graph('pie')">pie</a></li>
+
+                                <li><a href="#" title="doughnut" onclick="updatetype_graph('doughnut')">doughnut</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="color">
+                <nav>
+                    <ul>
+                        <li class ="deroulant"><a href="#">Couleur &ensp;</a>
+                            <ul class="sous">
+                                <li><a href="#" title="bleu" onclick="updatecolor('rgba(1,255,255,1)')">bleu</a></li>
+                                <li><a href="#" title="vert" onclick="updatecolor('rgba(255,1,255,1)')">vert</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+        
         <canvas id="graphique" width="100px" height="100px"></canvas>
-            <script>
-                // l'identifiant est celui du canevas
-                var ctx = document.getElementById('graphique').getContext('2d');
-                // création du graphique
-                var myChart = new Chart(ctx, {
-                type: 'polarArea',   // le type du graphique
-                data: {        // les données
-                  labels: ['Jean', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique','thomas le beau gosse','JEAN'],
-                  datasets: [{
-                              label: 'votes',
-                              data: [12, 19, 3, 5, 2, 3,50,20]
-                             }]
-                   }
-                   }
-             );
-            </script> 
+        <script>
+
+            const ctx = document.getElementById('graphique').getContext('2d');
+            const myChart = new Chart(ctx, {
+            type: ['line'],   // le type du graphique
+            data: {        // les données
+                labels: ['Jean', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique','thomas le beau gosse','JEAN'],
+                datasets: [{
+                            backgroundColor: 'rgba(255,255,255,1)',
+                            label: 'votes',
+                            data: [12, 19, 3, 5, 2, 3,50,20]
+                        }]
+                }
+            }
+            );
+
+        function updatecolor(color){
+            myChart.data.datasets[0].backgroundColor = color;
+            myChart.update();
+        }
+    
+        function updatetype_graph(type){
+            myChart.config.type = type;
+            myChart.update();
+        }
+        </script> 
+
     </div>
        
     

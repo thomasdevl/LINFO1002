@@ -1,18 +1,16 @@
-/* The sidebar menu */
 .sidenav {
     font-family: sans-serif;
-    height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 160px; /* Set the width of the sidebar */
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 1; /* Stay on top */
-    top: 0; /* Stay at the top */
+    height: 100%; 
+    width: 160px; 
+    position: fixed; 
+    z-index: 1; 
+    top: 0; 
     left: 0;
-    background-color: #111; /* Black */
-    overflow-x: hidden; /* Disable horizontal scroll */
+    background-color: #111; 
+    overflow-x: hidden; 
     padding-top: 20px;
 }
-  
-/* The navigation menu links */
+
 .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
@@ -21,7 +19,6 @@
     display: block;
 }
   
-/* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
     color: #f1f1f1;
 }
@@ -35,10 +32,9 @@
     border-radius: 50%;
 }
   
-/* Style page content */
 .main {
     font-family: Calibri;
-    margin-left: 160px; /* Same as the width of the sidebar */
+    margin-left: 160px; 
     padding: 0px 10px;
     height: 100%;
     margin: 0;
@@ -83,6 +79,102 @@ body{
 .info{
     font-family: sans-serif;
 }
+
+/* menu déroulant */
+nav{
+    width: auto;
+    background-color: #ffffff;
+    position: sticky;
+    top: 0px;
+}
+
+nav ul{
+    list-style-type: none;
+}
+
+nav ul li{
+    width: 25%;
+    text-align: center;
+    position: relative;
+}
+
+nav ul::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+nav a{
+    display:flex;
+    text-decoration:none;
+    color:rgb(255, 255, 255);
+    border-bottom:2px solid transparent;
+    opacity: 0.7;
+    transition: all 1s;
+}
+
+nav a:hover{
+    border-bottom:2px solid white;
+    display: flex;
+    opacity: 1;
+    font-size: 105%;
+    transition: all .5s;
+}
+
+.sous{
+    display:none;
+    box-shadow:0px 1px 2px rgb(234, 233, 233);
+    background-color:white;
+    text-align: center;
+    width: auto;
+}
+
+nav > ul li:hover .sous{
+    display:block;
+}
+
+.sous li{
+    float:none;
+    width:auto;
+    text-align:left;
+}
+
+.sous a{
+    padding:10px;
+    border-bottom:none;
+    color: rgb(255, 255, 255);
+}
+
+.sous a:hover{
+    border-bottom:none;
+    background-color:rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.deroulant > a::after{
+    content:" ▼";
+    font-size: 12px;
+}
+
+
+nav
+{
+    background-color:#fefefe;
+    margin-left: 5%;
+}
+
+nav ul .deroulant a
+{
+    color: rgb(0, 0, 0);
+    left: auto;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+ }
+/* menu déroulant */
+
 
 
 .graph {
