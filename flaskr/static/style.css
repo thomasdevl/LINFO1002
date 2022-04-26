@@ -1,3 +1,9 @@
+/* sidebar inspirez de :https://www.w3schools.com/howto/howto_css_fixed_sidebar.asp */
+
+*{
+    font-family: sans-serif;
+}
+
 .sidenav {
     font-family: sans-serif;
     height: 100%; 
@@ -6,7 +12,8 @@
     z-index: 1; 
     top: 0; 
     left: 0;
-    background-color: #111; 
+    /*background: linear-gradient(70deg, rgb(22, 22, 23), rgb(208, 199, 201));*/
+    background: linear-gradient(70deg, #9599bd, #eaf3d3);
     overflow-x: hidden; 
     padding-top: 20px;
 }
@@ -15,13 +22,14 @@
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: #000000;
     display: block;
 }
   
 .sidenav a:hover {
     color: #f1f1f1;
 }
+/* sidenav */
 
 .logo{
     margin: 0 auto;  /* met le graph au centre */
@@ -76,14 +84,29 @@ body{
     letter-spacing: 10px;
 }
 
-.info{
-    font-family: sans-serif;
+
+/* Bouton settings */
+
+.graph button {
+    background-color: #7c7474;
+    border: none;
+    color: rgb(0, 0, 0);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.graph button:hover {
+    background-color: #b6aeae;
+    color:rgb(0, 0, 0);
 }
 
 /* Mets les div en row */
 
 .flex {
-    display: flex;
+    display: none;
     flex-direction: row;
  }
 
@@ -92,14 +115,14 @@ body{
     font-family: sans-serif;
 }
 
-/* Button */
+/* Button radio inspiré de : https://www.w3schools.com/howto/howto_css_custom_checkbox.asp */
 .Qcm {
     display: block;
     position: relative;
     padding-left: 35px;
     margin-bottom: 12px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 15px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;

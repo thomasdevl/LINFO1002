@@ -13,62 +13,102 @@
     <h2> <center><u>Graphe</u> </center></h2>
         
     <div class = "graph"> 
-        <div class="flex">
-        
+
+        <button onclick="ShowSettings()">Settings</button>
+
+        <div class="flex" id="Cheese">
             <div class="qcm">
                 <h1>Type :</h1>
-                <label class="Qcm">Bar
+
+                    <label class="Qcm">Bar
                     <input type="radio" checked="checked" name="radio" onclick="updatetype_graph('bar')">
                     <span class="checkmark"></span>
-                  </label>
-                  <label class="Qcm">Radar
-                    <input type="radio" name="radio" onclick="updatetype_graph('radar')">
-                    <span class="checkmark"></span>
-                  </label>
-                  <label class="Qcm">PolarArea
+                    </label>
+
+                    <label class="Qcm">PolarArea
                     <input type="radio" name="radio" onclick="updatetype_graph('polarArea')">
                     <span class="checkmark"></span>
-                  </label>
-                  <label class="Qcm">Pie
+                    </label>
+
+                    <label class="Qcm">Pie
                     <input type="radio" name="radio" onclick="updatetype_graph('pie')">
                     <span class="checkmark"></span>
-                  </label>
-                  <label class="Qcm">Line
+                    </label>
+
+                    <label class="Qcm">Radar
+                    <input type="radio" name="radio" onclick="updatetype_graph('radar')">
+                    <span class="checkmark"></span>
+                    </label>
+
+                    <label class="Qcm">Line
                     <input type="radio" name="radio" onclick="updatetype_graph('line')">
                     <span class="checkmark"></span>
-                  </label>
+                    </label>
             </div>
 
             <div class="color">
                 <h1>Palette de couleur :</h1>
-                <label class="Qcm">Vintage
+
+                    <label class="Qcm">Vintage
                     <input type="radio" checked="checked" name="radio" onclick="updatecolor(['rgb(98, 131, 149)','rgb(150, 137, 123)','rgb(223, 213, 165)','rgb(219, 173, 106)','rgb(207, 153, 95)'])">
                     <span class="checkmark"></span>
-                  </label>
-                  <label class="Qcm">Océan
+                    </label>
+
+                    <label class="Qcm">Océan
                     <input type="radio" name="radio" onclick="updatecolor(['rgb(126, 46, 132)','rgb(0, 78, 152)','rgb(58, 175, 185)','rgb(100, 233, 238)','rgb(151, 200, 235)'])">
                     <span class="checkmark"></span>
-                  </label>
-                  <label class="Qcm">Chaleur
+                    </label>
+                    
+                    <label class="Qcm">Chaleur
                     <input type="radio" name="radio" onclick="updatecolor(['rgb(191, 25, 13)','rgb(255, 71, 71)','rgb(249, 198, 57)','rgb(184, 0, 70)','rgb(239, 131, 84)'])">
                     <span class="checkmark"></span>
-                  </label>
-                  <label class="Qcm">Bonbon
+                    </label>
+
+                    <label class="Qcm">Bonbon
                     <input type="radio" name="radio" onclick="updatecolor(['rgb(126, 46, 132)','rgb(209, 64, 129)','rgb(239, 121, 138)','rgb(210, 214, 239)','rgb(191, 25, 13)'])">
                     <span class="checkmark"></span>
-                  </label>
+                    </label>
             </div>
         </div>
+        <script>
+            //permet au bouton de cacher les paramètres
+            function ShowSettings() {
+              var x = document.getElementById("Cheese");
+              if (x.style.display === "none") {
+                x.style.display = "flex";
+              } else {
+                x.style.display = "none";
+              }
+            }
+            </script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
         
         <canvas id="graphique" width="100px" height="100px"></canvas>
         <script>
 
-            var colors = ['rgb(98, 131, 149)','rgb(150, 137, 123)','rgb(223, 213, 165)','rgb(219, 173, 106)','rgb(207, 153, 95)'];
-            var data =  [12, 19, 3, 5, 2, 3,50,20]
-            var labels = ['Jean', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique','thomas le beau gosse','JEAN']
+            //donné venant de la bd
+            const fam = '{{ graph_data.famille }}'; 
+            const fam_id = '{{ graph_data.famille_id }}'; 
+            const fam_names = '{{ graph_data.famille_names }}'; 
+            const fam_en_vie = '{{ graph_data.famille_en_vie }}';
+            const naiss = '{{ graph_data.naissance }}';
+            
+            var id = fam_id.slice(0)
 
+            var data =  [12, 19, 3, 5, 2, 3,50,20];
+            var labels = ['Jean', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique','thomas le beau gosse','JEAN'];
+
+            //var data = fam_id
+            //var labels = fam_names
+
+
+            console.log(id[0]);
+
+            //console.log(fam_names)
+
+            //repète les couleurs pour la palette 
+            var colors = ['rgb(98, 131, 149)','rgb(150, 137, 123)','rgb(223, 213, 165)','rgb(219, 173, 106)','rgb(207, 153, 95)'];
             window.onload = function pallette() {
             var bgColors = [];
             for (var i = 0; i < data.length; i++) {
@@ -90,18 +130,19 @@
             );
         };
 
+        // met a jour les couleurs du graph
         function updatecolor(color){
-            
             var col = []
 
             for (var i = 0; i < myChart.data.datasets[0].data.length; i++) {
                 col.push(color[i % color.length]);  
             }
-
+         
             myChart.data.datasets[0].backgroundColor = col;
             myChart.update();
         }
-    
+        
+        // met a jour le type de graph
         function updatetype_graph(type){
             myChart.config.type = type;            
             myChart.fillStyle = 'white';

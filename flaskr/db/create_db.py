@@ -1,4 +1,5 @@
 import sqlite3
+import heritage
 
 
 def main():
@@ -23,6 +24,11 @@ def main():
             print(f"{f} : succes")
         cursor.executescript(insert_content)
         conn.commit()
+
+
+    #calcule héritage génétique et le rajoute dans la db
+    heritage.heritage_gene(conn) 
+    print(f"Héritage ajouté")
 
     conn.close()
 
