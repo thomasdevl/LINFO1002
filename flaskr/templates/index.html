@@ -15,39 +15,45 @@
     <div class = "graph"> 
         <div class="flex">
         
-            <div class="Type">
-                <nav>
-                    <ul>
-                        <li class ="deroulant"><a href="#">Type &ensp;</a>
-                            <ul class="sous">
-                                <li><a href="#" title="bar" onclick="updatetype_graph('bar')">bar</a></li>
-
-                                <li><a href="#" title="radar" onclick="updatetype_graph('radar')">Radar</a></li>
-
-                                <li><a href="#" title="polarArea" onclick="updatetype_graph('polarArea')">PolarArea</a></li>
-
-                                <li><a href="#" title="pie" onclick="updatetype_graph('pie')">pie</a></li>
-
-                                <li><a href="#" title="doughnut" onclick="updatetype_graph('doughnut')">doughnut</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
+            <div class="qcm">
+                <h1>Type :</h1>
+                <label class="Qcm">Bar
+                    <input type="radio" checked="checked" name="radio" onclick="updatetype_graph('bar')">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="Qcm">Radar
+                    <input type="radio" name="radio" onclick="updatetype_graph('radar')">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="Qcm">PolarArea
+                    <input type="radio" name="radio" onclick="updatetype_graph('polarArea')">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="Qcm">Pie
+                    <input type="radio" name="radio" onclick="updatetype_graph('pie')">
+                    <span class="checkmark"></span>
+                  </label>
             </div>
 
             <div class="color">
-                <nav>
-                    <ul>
-                        <li class ="deroulant"><a href="#">Couleur &ensp;</a>
-                            <ul class="sous">
-                                <li><a href="#" title="bleu" onclick="updatecolor('rgba(1,255,255,1)')">bleu</a></li>
-                                <li><a href="#" title="vert" onclick="updatecolor('rgba(255,1,255,1)')">vert</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
+                <h1>Couleur :</h1>
+                <label class="Qcm">Bleu
+                    <input type="radio" checked="checked" name="radio" onclick="updatecolor('rgba(89, 237, 234, 0.8)')">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="Qcm">Rouge
+                    <input type="radio" name="radio" onclick="updatecolor('rgba(237, 44, 44, 0.8)')">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="Qcm">Vert
+                    <input type="radio" name="radio" onclick="updatecolor('rgba(41, 214, 48, 0.8)')">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="Qcm">Orange
+                    <input type="radio" name="radio" onclick="updatecolor('rgba(237, 172, 44, 0.8)')">
+                    <span class="checkmark"></span>
+                  </label>
             </div>
-
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
@@ -57,11 +63,11 @@
 
             const ctx = document.getElementById('graphique').getContext('2d');
             const myChart = new Chart(ctx, {
-            type: ['line'],   // le type du graphique
+            type: ['bar'],   // le type du graphique
             data: {        // les données
                 labels: ['Jean', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique','thomas le beau gosse','JEAN'],
                 datasets: [{
-                            backgroundColor: 'rgba(255,255,255,1)',
+                            backgroundColor: 'rgba(89, 237, 234, 0.8)',
                             label: 'votes',
                             data: [12, 19, 3, 5, 2, 3,50,20]
                         }]

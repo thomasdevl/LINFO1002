@@ -80,100 +80,83 @@ body{
     font-family: sans-serif;
 }
 
-/* menu déroulant */
-nav{
-    width: auto;
-    background-color: #ffffff;
-    position: sticky;
-    top: 0px;
-}
-
-nav ul{
-    list-style-type: none;
-}
-
-nav ul li{
-    width: 25%;
-    text-align: center;
-    position: relative;
-}
-
-nav ul::after{
-    content: "";
-    display: table;
-    clear: both;
-}
-
-nav a{
-    display:flex;
-    text-decoration:none;
-    color:rgb(255, 255, 255);
-    border-bottom:2px solid transparent;
-    opacity: 0.7;
-    transition: all 1s;
-}
-
-nav a:hover{
-    border-bottom:2px solid white;
-    display: flex;
-    opacity: 1;
-    font-size: 105%;
-    transition: all .5s;
-}
-
-.sous{
-    display:none;
-    box-shadow:0px 1px 2px rgb(234, 233, 233);
-    background-color:white;
-    text-align: center;
-    width: auto;
-}
-
-nav > ul li:hover .sous{
-    display:block;
-}
-
-.sous li{
-    float:none;
-    width:auto;
-    text-align:left;
-}
-
-.sous a{
-    padding:10px;
-    border-bottom:none;
-    color: rgb(255, 255, 255);
-}
-
-.sous a:hover{
-    border-bottom:none;
-    background-color:rgb(255, 255, 255);
-    text-decoration: none;
-}
-
-.deroulant > a::after{
-    content:" ▼";
-    font-size: 12px;
-}
-
-
-nav
-{
-    background-color:#fefefe;
-    margin-left: 5%;
-}
-
-nav ul .deroulant a
-{
-    color: rgb(0, 0, 0);
-    left: auto;
-}
+/* Bouton de choix */
 
 .flex {
     display: flex;
     flex-direction: row;
+
+
  }
-/* menu déroulant */
+
+.flex h1{
+    font-size: 20px;
+    font-family: sans-serif;
+}
+
+/* The container */
+.Qcm {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default radio button */
+  .Qcm input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Create a custom radio button */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .Qcm:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the radio button is checked, add a blue background */
+  .Qcm input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the indicator (dot/circle) when checked */
+  .Qcm input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the indicator (dot/circle) */
+  .Qcm .checkmark:after {
+       top: 9px;
+      left: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+  }
 
 
 
@@ -182,5 +165,5 @@ nav ul .deroulant a
     width: 800px;
     height: 800px;
     border-radius: 3px;
-     
 }
+/* Bouton de choix */
