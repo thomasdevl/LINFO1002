@@ -80,13 +80,11 @@ body{
     font-family: sans-serif;
 }
 
-/* Bouton de choix */
+/* Mets les div en row */
 
 .flex {
     display: flex;
     flex-direction: row;
-
-
  }
 
 .flex h1{
@@ -94,7 +92,7 @@ body{
     font-family: sans-serif;
 }
 
-/* The container */
+/* Button */
 .Qcm {
     display: block;
     position: relative;
@@ -106,16 +104,15 @@ body{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    font-family: sans-serif;
   }
   
-  /* Hide the browser's default radio button */
   .Qcm input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
   }
   
-  /* Create a custom radio button */
   .checkmark {
     position: absolute;
     top: 0;
@@ -126,29 +123,24 @@ body{
     border-radius: 50%;
   }
   
-  /* On mouse-over, add a grey background color */
   .Qcm:hover input ~ .checkmark {
     background-color: #ccc;
   }
   
-  /* When the radio button is checked, add a blue background */
   .Qcm input:checked ~ .checkmark {
     background-color: #2196F3;
   }
   
-  /* Create the indicator (the dot/circle - hidden when not checked) */
   .checkmark:after {
     content: "";
     position: absolute;
     display: none;
   }
   
-  /* Show the indicator (dot/circle) when checked */
   .Qcm input:checked ~ .checkmark:after {
     display: block;
   }
   
-  /* Style the indicator (dot/circle) */
   .Qcm .checkmark:after {
        top: 9px;
       left: 9px;
@@ -157,7 +149,7 @@ body{
       border-radius: 50%;
       background: white;
   }
-
+/* Bouton de choix */
 
 
 .graph {
@@ -166,4 +158,3 @@ body{
     height: 800px;
     border-radius: 3px;
 }
-/* Bouton de choix */

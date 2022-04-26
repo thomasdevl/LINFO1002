@@ -33,24 +33,28 @@
                     <input type="radio" name="radio" onclick="updatetype_graph('pie')">
                     <span class="checkmark"></span>
                   </label>
+                  <label class="Qcm">Line
+                    <input type="radio" name="radio" onclick="updatetype_graph('line')">
+                    <span class="checkmark"></span>
+                  </label>
             </div>
 
             <div class="color">
-                <h1>Couleur :</h1>
-                <label class="Qcm">Bleu
-                    <input type="radio" checked="checked" name="radio" onclick="updatecolor('rgba(89, 237, 234, 0.8)')">
+                <h1>Palette de couleur :</h1>
+                <label class="Qcm">Vintage
+                    <input type="radio" checked="checked" name="radio" onclick="updatecolor(['rgb(98, 131, 149)','rgb(150, 137, 123)','rgb(223, 213, 165)','rgb(219, 173, 106)','rgb(207, 153, 95)'])">
                     <span class="checkmark"></span>
                   </label>
-                  <label class="Qcm">Rouge
-                    <input type="radio" name="radio" onclick="updatecolor('rgba(237, 44, 44, 0.8)')">
+                  <label class="Qcm">Océan
+                    <input type="radio" name="radio" onclick="updatecolor(['rgb(126, 46, 132)','rgb(0, 78, 152)','rgb(58, 175, 185)','rgb(100, 233, 238)','rgb(151, 200, 235)'])">
                     <span class="checkmark"></span>
                   </label>
-                  <label class="Qcm">Vert
-                    <input type="radio" name="radio" onclick="updatecolor('rgba(41, 214, 48, 0.8)')">
+                  <label class="Qcm">Chaleur
+                    <input type="radio" name="radio" onclick="updatecolor(['rgb(191, 25, 13)','rgb(255, 71, 71)','rgb(249, 198, 57)','rgb(184, 0, 70)','rgb(239, 131, 84)'])">
                     <span class="checkmark"></span>
                   </label>
-                  <label class="Qcm">Orange
-                    <input type="radio" name="radio" onclick="updatecolor('rgba(237, 172, 44, 0.8)')">
+                  <label class="Qcm">Bonbon
+                    <input type="radio" name="radio" onclick="updatecolor(['rgb(126, 46, 132)','rgb(209, 64, 129)','rgb(239, 121, 138)','rgb(210, 214, 239)','rgb(191, 25, 13)'])">
                     <span class="checkmark"></span>
                   </label>
             </div>
@@ -61,27 +65,46 @@
         <canvas id="graphique" width="100px" height="100px"></canvas>
         <script>
 
+            var colors = ['rgb(98, 131, 149)','rgb(150, 137, 123)','rgb(223, 213, 165)','rgb(219, 173, 106)','rgb(207, 153, 95)'];
+            var data =  [12, 19, 3, 5, 2, 3,50,20]
+            var labels = ['Jean', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique','thomas le beau gosse','JEAN']
+
+            window.onload = function pallette() {
+            var bgColors = [];
+            for (var i = 0; i < data.length; i++) {
+                bgColors.push(colors[i % colors.length]);  
+            }
+
             const ctx = document.getElementById('graphique').getContext('2d');
-            const myChart = new Chart(ctx, {
+            window.myChart = new Chart(ctx, {
             type: ['bar'],   // le type du graphique
             data: {        // les données
-                labels: ['Jean', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique','thomas le beau gosse','JEAN'],
+                labels: labels,
                 datasets: [{
-                            backgroundColor: 'rgba(89, 237, 234, 0.8)',
+                            backgroundColor: bgColors,
                             label: 'votes',
-                            data: [12, 19, 3, 5, 2, 3,50,20]
+                            data: data
                         }]
                 }
             }
             );
+        };
 
         function updatecolor(color){
-            myChart.data.datasets[0].backgroundColor = color;
+            
+            var col = []
+
+            for (var i = 0; i < myChart.data.datasets[0].data.length; i++) {
+                col.push(color[i % color.length]);  
+            }
+
+            myChart.data.datasets[0].backgroundColor = col;
             myChart.update();
         }
     
         function updatetype_graph(type){
-            myChart.config.type = type;
+            myChart.config.type = type;            
+            myChart.fillStyle = 'white';
             myChart.update();
         }
         </script> 
