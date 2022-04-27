@@ -25,13 +25,21 @@ class data:
             for row in cursor.execute("SELECT id, nom FROM familles"):
                 fam.append(row)
             return fam
-            
-        with self.conn as cursor:
-            return cursor.execute("SELECT id, nom FROM familles").fetchall()
 
     def mort_premat(self):
+        fam = []
         with self.conn as cursor:
-            pass #a trouver
+            for row in cursor.execute("SELECT "):
+                fam.append(row)
+            return fam
+
+    def mort_premat_fam(self):
+        fam = []
+        with self.conn as cursor:
+            for row in cursor.execute("SELECT id, nom FROM familles"):
+                fam.append(row)
+            return fam
+            
 
     def famille_en_vie(self):
         with self.conn as cursor:

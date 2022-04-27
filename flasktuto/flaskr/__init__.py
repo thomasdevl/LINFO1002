@@ -33,7 +33,12 @@ def home():
 	fam_en_v = fromage.famille_en_vie()
 
 	#naissance 
-	naiss = fromage.naissances()
+	naiss = fromage.naissances() #lst de toutes les dates de naissances 
+
+	#dico avec le nmbr de naissance par jour 
+	d_naiss = dict()
+	for i in naiss:
+		d_naiss[i] = d_naiss.get(i, 0) + 1
 
 	fromage.deco()
 
@@ -42,7 +47,8 @@ def home():
 		"famille_id": fam_id,
 		"famille_names" : fam_names,
 		"famille_en_vie" : fam_en_v,
-		"naissance" : naiss
+		"naissance" : naiss,
+		"naissance_dico" : d_naiss
 	}
 
 	return render_template("index.html",graph_data=graph_data) 

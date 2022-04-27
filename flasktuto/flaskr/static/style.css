@@ -84,11 +84,18 @@ body{
     letter-spacing: 10px;
 }
 
+.cadre {
+  display: flex;
+  margin: auto;
+  width: 60%;
+  border: 3px solid #63634c;
+  padding: 10px;
+}
 
 /* Bouton settings */
 
 .graph button {
-    background-color: #7c7474;
+    background-color: #a19393;
     border: none;
     color: rgb(0, 0, 0);
     padding: 15px 32px;
@@ -103,11 +110,49 @@ body{
     color:rgb(0, 0, 0);
 }
 
+.graph > button:after {
+  content:" ▼";
+  font-size: 12px;
+
+}
+
+
 /* Mets les div en row */
+
+.graph_but {
+  display: flex;
+  margin: auto;
+  width: 60%;
+  border: 3px solid #63634c;
+  padding: 10px;
+}
+
+.graph_but > .bout:not(:last-child) {
+  margin-right: 100px;
+}
+
+.graph_but .bout{
+  background-color: #a19393;
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.graph_but .bout:hover{
+    background-color: #b6aeae;
+    color:rgb(0, 0, 0);
+}
 
 .flex {
     display: none;
     flex-direction: row;
+    background-color: rgba(146, 123, 123, 0.346);
+    /*margin-right: 500px; */
+
  }
 
 .flex h1{

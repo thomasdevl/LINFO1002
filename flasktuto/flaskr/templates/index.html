@@ -10,11 +10,46 @@
         </div>
         
         
-    <h2> <center><u>Graphe</u> </center></h2>
-        
+    <h2> <center><u>________________________________________________________________________</u> </center></h2>
+    <br>
+
+    <div class="cadre">
+
+    <div class="date">
+
+      
+        <label for="start">Start date:</label>
+
+        <input type="date" id="start" name="trip-start"
+                    value="2018-07-22"
+                    min="1990-10-03" max="2020-12-19">   
+
+        <label for="start">End date:</label>
+
+        <input type="date" id="stop" name="trip-stop"
+                    value="2018-07-22"
+                    min="1990-10-03" max="2020-12-19">   
+
+
+    </div>
+    </div>
+<br>
+<br>
+
+    <div class = graph_but>
+
+        <button class= "bout" onclick="Graphnaissance()">Graph Naissance </button>
+        <button class= "bout">Graph 2 </button>
+        <button class= "bout">Graph 3 </button>
+
+    </div>
+        <br>
+
+        <br>
     <div class = "graph"> 
 
-        <button onclick="ShowSettings()">Settings</button>
+        <br>
+        <button onclick="ShowSettings()">Settings </button>
 
         <div class="flex" id="Cheese">
             <div class="qcm">
@@ -74,10 +109,10 @@
             //permet au bouton de cacher les paramètres
             function ShowSettings() {
               var x = document.getElementById("Cheese");
-              if (x.style.display === "none") {
-                x.style.display = "flex";
-              } else {
+              if (x.style.display === "flex") {
                 x.style.display = "none";
+              } else {
+                x.style.display = "flex";
               }
             }
             </script>
@@ -88,22 +123,53 @@
         <script>
 
             //donné venant de la bd
-            const fam = '{{ graph_data.famille }}'; 
-            const fam_id = '{{ graph_data.famille_id }}'; 
-            const fam_names = '{{ graph_data.famille_names }}'; 
+            const fam = '{{ graph_data.famille |tojson}}'; 
+            const fam_id = '{{ graph_data.famille_id |tojson}}'; 
+            const fam_names = '{{ graph_data.famille_names |tojson }}'; 
             const fam_en_vie = '{{ graph_data.famille_en_vie }}';
             const naiss = '{{ graph_data.naissance }}';
+            const naiss_dico = '{{ graph_data.naissance_dico }}';
             
-            var id = fam_id.slice(0)
+            //modif les valeurs en list et les convet en int si nécessaire
+            var fam_id_lst_int = fam_id.replace('[', '').replace(']', '').split(",").map(Number);
+            var fam_names_lst = fam_names.replace('[', '').replace(']', '').split(",")
+
+            var naiss_lst = naiss.replace('[', '').replace(']', '').split(",")
+            let naiss_d_lst =  naiss_dico.replaceAll('{', '').replaceAll('}', '').replaceAll('(&#39;', '').replaceAll('&#39;,):', '').replaceAll(',', '').split(" ")
+
+
+            //dictionnaire avec chaque date et le nombre de naissance 
+            let naiss_dic = {}; 
+                for (let i=0; i< naiss_d_lst.length; i=i+2 ) {
+                    naiss_dic[naiss_d_lst[i]] = naiss_d_lst[i+1];
+            }
+
+
+            var date_start = document.getElementById("start");
+            var date_stop = document.getElementById("stop");
+
+            //console.log(date_start)
+            //console.log(date_stop)
+
+            var key = '01/01/1999'
+
+
+
+            console.log(Object.keys(naiss_dic));
+            console.log('01/01/1999' in naiss_dic);
+            console.log(naiss_dic)
 
             var data =  [12, 19, 3, 5, 2, 3,50,20];
-            var labels = ['Jean', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique','thomas le beau gosse','JEAN'];
+            var labels = ['Jean', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique','thomas','JEAN'];
 
-            //var data = fam_id
-            //var labels = fam_names
+            //var data = fam_id_lst_int
+            //var labels = fam_names_lst
 
 
-            console.log(id[0]);
+            //console.log(fam_names[0])
+            //console.log(fam_id_lst_int);
+            //console.log(fam_id_lst_int[0]);
+            //console.log(Array.isArray(fam_id_lst_int)); 
 
             //console.log(fam_names)
 
@@ -125,10 +191,77 @@
                             label: 'votes',
                             data: data
                         }]
-                }
+                }, 
+            options :{
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            drawOnChartArea: true
+                            }
+                            }],
+                    yAxes: [{
+                        gridLines: {
+                            drawOnChartArea: true
+            }
+        }]
+    }
+            }
             }
             );
         };
+
+        //creer le graph avec le nombre de naissance par jour en fct de la date
+        function Graphnaissance(){
+
+            //recup les dates input par le user
+            var date_start = document.getElementById("start").value;
+            var date_stop = document.getElementById("stop").value;
+
+            //console.log(date_start)
+            //console.log(date_stop)
+
+            //creer une liste avec tous les jours entre les deux dates
+            var getDaysArray = function(start, end) {
+                for(var arr=[],dt=new Date(start); dt<=new Date(end); dt.setDate(dt.getDate()+1)){
+                arr.push(new Date(dt));
+                }
+            return arr;
+            };
+
+            var date_lst = getDaysArray(new Date(date_start),new Date(date_stop));
+            //console.log(date_lst);
+
+            
+            //reg dans le dico si c'est dedans et creer une nouvelle liste avec le nombre de naissance par jour 
+            
+            //naiss_dic
+            var nmb_naissance =[];
+            var jour = [];
+
+            for (var i = 0; i < date_lst.length; i++) {
+
+                var month = date_lst[i].getUTCMonth() + 1; //months from 1-12
+                var day = date_lst[i].getUTCDate();
+                var year = date_lst[i].getUTCFullYear();
+
+                newdate = day + "/" + month + "/" + year;
+
+                if (newdate in naiss_dic){
+                    nmb_naissance.push(naiss_dic[newdate])
+                    jour.push(newdate)
+                }else{
+                    nmb_naissance.push(0)
+                    jour.push(newdate)
+                }
+            }
+
+            
+            //mettre a jour le graph avec les 2 listes
+            myChart.data.labels = jour;
+            myChart.data.datasets[0].data = nmb_naissance;
+            myChart.update();
+            
+        }
 
         // met a jour les couleurs du graph
         function updatecolor(color){
@@ -144,8 +277,24 @@
         
         // met a jour le type de graph
         function updatetype_graph(type){
-            myChart.config.type = type;            
-            myChart.fillStyle = 'white';
+
+
+            myChart.config.type = type;  
+
+            if(type == 'polarArea' || type == 'pie' || type == 'radar'){
+                myChart.options.scales.xAxes[0].gridLines.color = "#FFFFFF";
+                myChart.options.scales.yAxes[0].gridLines.color = "#FFFFFF";
+                myChart.options.scales.xAxes[0].ticks.display = false;
+                myChart.options.scales.yAxes[0].ticks.display = false;
+            }
+
+            if(type == 'bar' || type == 'line'){
+                myChart.options.scales.xAxes[0].ticks.display = true;
+                myChart.options.scales.yAxes[0].ticks.display = true;
+                myChart.options.scales.xAxes[0].gridLines.color = "rgb(231,233,237)";
+                myChart.options.scales.yAxes[0].gridLines.color = "rgb(231,233,237)";
+            }
+
             myChart.update();
         }
         </script> 
