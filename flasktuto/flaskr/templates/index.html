@@ -108,12 +108,12 @@
         <script>
             //permet au bouton de cacher les paramètres
             function ShowSettings() {
-              var x = document.getElementById("Cheese");
-              if (x.style.display === "flex") {
-                x.style.display = "none";
-              } else {
-                x.style.display = "flex";
-              }
+                var x = document.getElementById("Cheese");
+                if (x.style.display === "flex") {
+                    x.style.display = "none";
+                } else {
+                    x.style.display = "flex";
+                }
             }
             </script>
 
@@ -154,7 +154,6 @@
             var key = '01/01/1999'
 
 
-
             console.log(Object.keys(naiss_dic));
             console.log('01/01/1999' in naiss_dic);
             console.log(naiss_dic)
@@ -189,6 +188,7 @@
                 datasets: [{
                             backgroundColor: bgColors,
                             label: 'votes',
+                            fill: false,
                             data: data
                         }]
                 }, 
@@ -202,101 +202,105 @@
                     yAxes: [{
                         gridLines: {
                             drawOnChartArea: true
-            }
-        }]
-    }
-            }
+                            }
+                        }]
+                    }   
+                }
             }
             );
-        };
-
-        //creer le graph avec le nombre de naissance par jour en fct de la date
-        function Graphnaissance(){
-
-            //recup les dates input par le user
-            var date_start = document.getElementById("start").value;
-            var date_stop = document.getElementById("stop").value;
-
-            //console.log(date_start)
-            //console.log(date_stop)
-
-            //creer une liste avec tous les jours entre les deux dates
-            var getDaysArray = function(start, end) {
-                for(var arr=[],dt=new Date(start); dt<=new Date(end); dt.setDate(dt.getDate()+1)){
-                arr.push(new Date(dt));
-                }
-            return arr;
             };
 
-            var date_lst = getDaysArray(new Date(date_start),new Date(date_stop));
-            //console.log(date_lst);
+            //creer le graph avec le nombre de naissance par jour en fct de la date
+            function Graphnaissance(){
 
-            
-            //reg dans le dico si c'est dedans et creer une nouvelle liste avec le nombre de naissance par jour 
-            
-            //naiss_dic
-            var nmb_naissance =[];
-            var jour = [];
+                //recup les dates input par le user
+                var date_start = document.getElementById("start").value;
+                var date_stop = document.getElementById("stop").value;
 
-            for (var i = 0; i < date_lst.length; i++) {
+                //console.log(date_start)
+                //console.log(date_stop)
 
-                var month = date_lst[i].getUTCMonth() + 1; //months from 1-12
-                var day = date_lst[i].getUTCDate();
-                var year = date_lst[i].getUTCFullYear();
+                //creer une liste avec tous les jours entre les deux dates
+                var getDaysArray = function(start, end) {
+                    for(var arr=[],dt=new Date(start); dt<=new Date(end); dt.setDate(dt.getDate()+1)){
+                    arr.push(new Date(dt));
+                    }
+                return arr;
+                };
 
-                newdate = day + "/" + month + "/" + year;
+                var date_lst = getDaysArray(new Date(date_start),new Date(date_stop));
+                //console.log(date_lst);
 
-                if (newdate in naiss_dic){
-                    nmb_naissance.push(naiss_dic[newdate])
-                    jour.push(newdate)
-                }else{
-                    nmb_naissance.push(0)
-                    jour.push(newdate)
+                
+                //reg dans le dico si c'est dedans et creer une nouvelle liste avec le nombre de naissance par jour 
+                
+                //naiss_dic
+                var nmb_naissance =[];
+                var jour = [];
+
+                for (var i = 0; i < date_lst.length; i++) {
+
+                    //changer les dates pour être comme dans le dico 
+                    var month = date_lst[i].getUTCMonth() + 1; //months from 1-12
+                    var day = date_lst[i].getUTCDate();
+                    var year = date_lst[i].getUTCFullYear();
+
+                    newdate = day + "/" + month + "/" + year;
+
+                    if (newdate in naiss_dic){
+                        nmb_naissance.push(naiss_dic[newdate])
+                        jour.push(newdate)
+                    }else{
+                        nmb_naissance.push(0)
+                        jour.push(newdate)
+                    }
                 }
+
+                //comparer les dates avec les familles choisient et baisser de 1 la valeur dans la lst nmb_naissance
+                // aller sur chaque element de jour et si pas dans la liste et pas a zero descendre de 1
+
+                
+                //mettre a jour le graph avec les 2 listes
+                myChart.data.labels = jour;
+                myChart.data.datasets[0].data = nmb_naissance;
+                myChart.update();
+                
             }
 
+            // met a jour les couleurs du graph
+            function updatecolor(color){
+                var col = []
+
+                for (var i = 0; i < myChart.data.datasets[0].data.length; i++) {
+                    col.push(color[i % color.length]);  
+                }
             
-            //mettre a jour le graph avec les 2 listes
-            myChart.data.labels = jour;
-            myChart.data.datasets[0].data = nmb_naissance;
-            myChart.update();
+                myChart.data.datasets[0].backgroundColor = col;
+                myChart.update();
+            }
             
-        }
+            // met a jour le type de graph
+            function updatetype_graph(type){
 
-        // met a jour les couleurs du graph
-        function updatecolor(color){
-            var col = []
 
-            for (var i = 0; i < myChart.data.datasets[0].data.length; i++) {
-                col.push(color[i % color.length]);  
+                myChart.config.type = type;  
+
+                if(type == 'polarArea' || type == 'pie' || type == 'radar'){
+                    myChart.options.scales.xAxes[0].gridLines.color = "#FFFFFF";
+                    myChart.options.scales.yAxes[0].gridLines.color = "#FFFFFF";
+                    myChart.options.scales.xAxes[0].ticks.display = false;
+                    myChart.options.scales.yAxes[0].ticks.display = false;
+                }
+
+                if(type == 'bar' || type == 'line'){
+                    myChart.options.scales.xAxes[0].ticks.display = true;
+                    myChart.options.scales.yAxes[0].ticks.display = true;
+                    myChart.options.scales.xAxes[0].gridLines.color = "rgb(231,233,237)";
+                    myChart.options.scales.yAxes[0].gridLines.color = "rgb(231,233,237)";
+                }
+
+                myChart.update();
             }
-         
-            myChart.data.datasets[0].backgroundColor = col;
-            myChart.update();
-        }
-        
-        // met a jour le type de graph
-        function updatetype_graph(type){
-
-
-            myChart.config.type = type;  
-
-            if(type == 'polarArea' || type == 'pie' || type == 'radar'){
-                myChart.options.scales.xAxes[0].gridLines.color = "#FFFFFF";
-                myChart.options.scales.yAxes[0].gridLines.color = "#FFFFFF";
-                myChart.options.scales.xAxes[0].ticks.display = false;
-                myChart.options.scales.yAxes[0].ticks.display = false;
-            }
-
-            if(type == 'bar' || type == 'line'){
-                myChart.options.scales.xAxes[0].ticks.display = true;
-                myChart.options.scales.yAxes[0].ticks.display = true;
-                myChart.options.scales.xAxes[0].gridLines.color = "rgb(231,233,237)";
-                myChart.options.scales.yAxes[0].gridLines.color = "rgb(231,233,237)";
-            }
-
-            myChart.update();
-        }
         </script> 
 
     </div>

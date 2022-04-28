@@ -2,23 +2,21 @@
 import sqlite3
 
 
-def recup_races(conn,id):
+def recup_races(conn,a):
     #recup la race de l'animal grace a son id
 
     with conn as cursor:
-        return cursor.execute("SELECT type_id, pourcentage FROM animaux_types WHERE animal_id = ?",(id)).fetchall()
+        return cursor.execute("SELECT type_id, pourcentage FROM animaux_types WHERE animal_id = ?", (a,)).fetchall()
 
-def recup_parents(conn,id):
+def recup_parents(conn,a):
     #recup la race des parents 
 
     with conn as cursor:
-        return cursor.execute("SELECT pere_id, mere_id FROM animaux, animaux_velages, velages WHERE animaux.id = ? AND animaux.id = animaux_velages.animal_id AND animaux_velages.animal_id = velages.id",(id,))
+        return cursor.execute("SELECT pere_id, mere_id FROM animaux, animaux_velages, velages WHERE animaux.id = ? AND animaux.id = animaux_velages.animal_id AND animaux_velages.animal_id = velages.id",(a,)).fetchall()
 
 
-def calcul_race(race_mere,race_pere):
+def calcul_race(race_parent):
 
-    #calcul la race de l'enfant apd de celle des parents
-    race_parent = race_mere + race_pere
 
     dic = {}
     for race in race_parent:
@@ -35,7 +33,8 @@ def calcul_race(race_mere,race_pere):
 def race_vers_db(conn,id,race):
     for r in race:
         with conn as cursor:
-            cursor.execute("INSERT INTO animaux_types VALUES (?, ?, ?)", (id, race[0], race[1]))
+            cursor.execute("INSERT INTO animaux_types VALUES (?, ?, ?)", (id, r[0], r[1]))
+            print(f"added : id :{id} , type: {r[0]} ,pourct : {r[1]}")
     
 
 
@@ -43,13 +42,25 @@ def set_races(conn,id):
     
 
     #récup les parents de la vache
-    parents = recup_parents(conn, id)
-    mere = parents[0]
-    pere = parents[1]
+    if type(id) == tuple:
+        idc = id[0]
+    else:
+        idc = id
+    
+    parents = recup_parents(conn, idc)
+
+
+    if len(parents) == 0 : #si pas de parents :(
+        return recup_races(conn,idc)
+
+    pere = parents[0][0]
+    mere = parents[0][1]
+
 
     #récup races des parents
-    race_mere = recup_races(conn, mere)
-    race_pere = recup_races(conn, pere)
+    race_mere = recup_races(conn, int(mere))
+    race_pere = recup_races(conn, int(pere))
+
 
     #si les parents n'ont pas de race calculé la leur en premier
     if len(race_mere) == 0:
@@ -58,9 +69,9 @@ def set_races(conn,id):
     if len(race_pere) == 0:
         race_pere = set_races(conn, pere)
 
-    race = calcul_race(race_mere,race_pere)
+    race = calcul_race(race_mere +race_pere)
 
-    race_vers_db(conn,id,race)
+    race_vers_db(conn,idc,race)
 
     return race
 
@@ -76,11 +87,12 @@ def heritage_gene(conn):
     #pour chaque vache dans la db
     for id in lst_id:
 
+
         #recup la race de l'animal grace a son id
         races = []
-        races.append(recup_races(conn,id))
+        races.append(recup_races(conn,id[0]))
+
         
-        
-        if len(races) == 0:
+        if races[0] == []:
             set_races(conn,id)
     
