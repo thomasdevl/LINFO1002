@@ -1,9 +1,9 @@
 # LINFO1002
 Projet 2  : site avec des graph de vache
 
-A faire dans l'ordre:
+## A faire dans l'ordre:
 
-## Installation et run du projet
+### Installation et run du projet
 
 Clone/dowload le repo
 
@@ -13,7 +13,7 @@ cd flasktuto
 ```
 
 
-## Setup la database
+### Setup la database
 
 ```
 cd /flaskr/db
