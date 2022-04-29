@@ -7,6 +7,11 @@ je suis sur mac ducoup sur windows je sais pas comment ca fonctionne
 
 # POUR MAC
 
+test pc dimi 
+
+
+# POUR WINDOWS
+
 ### Installation et run du projet
 
 Clone/dowload le repo
