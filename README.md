@@ -12,9 +12,13 @@ git clone https://github.com/thomasdevl/LINFO1002
 cd flasktuto
 ```
 
+### Instalation de Flask
+```
+pip install -r flask
+```
 
-### Setup la database
 
+### Setup la database (déjà fait)
 ```
 cd /flaskr/db
 python3 create_db.py
