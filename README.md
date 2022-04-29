@@ -12,12 +12,12 @@ cd flasktuto
 ```
 
 
-db 
+## Setup la database
 
 ```
-cd
+cd /flaskr/db
 python3 create_db.py
-cd
+cd ..
 ```
 
 
