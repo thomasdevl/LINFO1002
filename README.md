@@ -3,8 +3,6 @@ Projet 2  : site avec des graph de vache
 
 ## A faire dans l'ordre:
 
-je suis sur mac ducoup sur windows je sais pas comment ca fonctionne 
-
 # POUR MAC
 
 test pc dimi 
