@@ -147,6 +147,11 @@ body{
     color:rgb(0, 0, 0);
 }
 
+.check {
+  margin-left: 20px;
+  padding-left: 20px  ;
+}
+
 .flex {
     display: none;
     flex-direction: row;

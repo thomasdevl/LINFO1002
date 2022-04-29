@@ -13,34 +13,69 @@
     <h2> <center><u>________________________________________________________________________</u> </center></h2>
     <br>
 
-    <div class="cadre">
-
-    <div class="date">
-
-      
-        <label for="start">Start date:</label>
-
-        <input type="date" id="start" name="trip-start"
-                    value="2018-07-22"
-                    min="1990-10-03" max="2020-12-19">   
-
-        <label for="start">End date:</label>
-
-        <input type="date" id="stop" name="trip-stop"
-                    value="2018-07-22"
-                    min="1990-10-03" max="2020-12-19">   
-
-
-    </div>
-    </div>
 <br>
 <br>
 
     <div class = graph_but>
+        <button class= "bout" onclick="Graphnaissance()">Graphique des Naissances </button>
 
-        <button class= "bout" onclick="Graphnaissance()">Graph Naissance </button>
-        <button class= "bout">Graph 2 </button>
-        <button class= "bout">Graph 3 </button>
+
+        <div class="date">
+
+      
+            <label for="start"><b>Start date:</b></label> 
+    
+            <input type="date" id="start" name="trip-start"
+                        value="2018-07-22"
+                        min="1990-10-03" max="2020-12-19">  
+                        
+                <br>
+                <br>
+    
+            <label for="start"><b>End date :</b></label>
+    
+            <input type="date" id="stop" name="trip-stop"
+                        value="2018-07-22"
+                        min="1990-10-03" max="2020-12-19">   
+    
+        </div>
+
+    
+    </div>
+    <br>
+
+    <div class="graph_but">
+
+        <div class="bout">
+
+        <button class= "bout" onclick="GraphLune()"> Naissances Lunaire </button>
+
+        </div>
+
+    </div>
+    <br>
+
+    <div class = graph_but>
+
+        <button class= "bout" onclick="Graphrace()">Répartition des Races </button>
+
+        
+        <p><b>Choix des races :   &nbsp;</b><p> 
+            <div class="Check">
+            <label class="Race">Holstein
+            <input type="checkbox" checked="checked">
+            <span class="checkmark"></span>
+            </label>
+            <br>
+            <label class="Race">Blanc Bleu Belge
+            <input type="checkbox">
+            <span class="checkmark"></span>
+            </label>
+            <br>
+            <label class="Race">Jersey
+            <input type="checkbox">
+            <span class="checkmark"></span>
+        </div>
 
     </div>
         <br>
@@ -129,7 +164,12 @@
             const fam_en_vie = '{{ graph_data.famille_en_vie }}';
             const naiss = '{{ graph_data.naissance }}';
             const naiss_dico = '{{ graph_data.naissance_dico }}';
-            
+            const lst_datetype = '{{ graph_data.lst_datetype }}';
+            const d_lune_pyth = '{{ graph_data.dico_lune }}';
+
+        
+
+                
             //modif les valeurs en list et les convet en int si nécessaire
             var fam_id_lst_int = fam_id.replace('[', '').replace(']', '').split(",").map(Number);
             var fam_names_lst = fam_names.replace('[', '').replace(']', '').split(",")
@@ -144,19 +184,39 @@
                     naiss_dic[naiss_d_lst[i]] = naiss_d_lst[i+1];
             }
 
-
             var date_start = document.getElementById("start");
             var date_stop = document.getElementById("stop");
 
-            //console.log(date_start)
-            //console.log(date_stop)
+            //modif la liste date $ (type pourc) en lst js
+            lst_clean = lst_datetype.replaceAll('&#39;','').replaceAll('&#34;','').replaceAll("&#39;,",'').replaceAll('(&#39;', '').replaceAll('&#39;,):', '').split("!")
+            lst_date_type= []
+            for (var i = 0; i < lst_clean.length; i++) {
+                lst_date_type.push(lst_clean[i].split("$"));  
+            }
+            //console.log(lst_date_type)
 
-            var key = '01/01/1999'
+            //création d'un dico avec la date en clé et les type et % en déf
+            dico_date_type = {}
+            for (var i = 0; i < lst_date_type.length; i++) {
+                type = lst_date_type[i][1]
+                if (typeof type != 'undefined'){
+                    dico_date_type[(lst_date_type[i][0]).replaceAll(',','').replaceAll("(",'').replaceAll(")",'').replaceAll(" ",'')] = type.replaceAll("[",'').replaceAll("]",'');
+                } 
+            }
+
+            //console.log(dico_date_type)
+            //console.log(naiss_dic)
 
 
-            console.log(Object.keys(naiss_dic));
-            console.log('01/01/1999' in naiss_dic);
-            console.log(naiss_dic)
+            //copie du dic d_lune venu depuis python
+            a = d_lune_pyth.replaceAll('&#39;','').replaceAll('{','').replaceAll('}','').replaceAll(' ','').replaceAll(':',',').split(",")
+            console.log(a)
+            d_lune = {}
+            for (let i=0; i< a.length; i=i+2 ) {
+                    d_lune[a[i]] = a[i+1];
+            }
+            console.log(d_lune)
+
 
             var data =  [12, 19, 3, 5, 2, 3,50,20];
             var labels = ['Jean', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique','thomas','JEAN'];
@@ -258,6 +318,15 @@
 
                 //comparer les dates avec les familles choisient et baisser de 1 la valeur dans la lst nmb_naissance
                 // aller sur chaque element de jour et si pas dans la liste et pas a zero descendre de 1
+                lst_date_type //lst : [[(date)],[(type pourcentage) (type pourcentage)]]
+
+                //création d'un dico avec la date en clé et les type et % en déf
+                dico_date_type = {}
+                for (var i = 0; i < lst_date_type.length; i++) {
+                    dico_date_type[lst_datetype[i][0]] = lst_datetype[i][1];
+                }
+
+                console.log(dico_date_type)
 
                 
                 //mettre a jour le graph avec les 2 listes
@@ -266,6 +335,72 @@
                 myChart.update();
                 
             }
+
+            //naissance lunaire en fct de la date choisi
+            function GraphLune(){
+
+                //recup les dates input par le user
+                var date_start = document.getElementById("start").value;
+                var date_stop = document.getElementById("stop").value;
+
+                //creer une liste avec tous les jours entre les deux dates
+                var getDaysArray = function(start, end) {
+                    for(var arr=[],dt=new Date(start); dt<=new Date(end); dt.setDate(dt.getDate()+1)){
+                    arr.push(new Date(dt));
+                    }
+                return arr;
+                };
+
+                var date_lst = getDaysArray(new Date(date_start),new Date(date_stop));
+
+                var lune = 0 //incrementer en fct 
+                var nrml = 0
+
+
+                for (var i = 0; i < date_lst.length; i++) {
+
+                    //changer les dates pour être comme dans le dico 
+                    var month = date_lst[i].getUTCMonth() + 1; //months from 1-12
+                    var day = date_lst[i].getUTCDate();
+                    var year = date_lst[i].getUTCFullYear();
+
+                    newdate = day + "/" + month + "/" + year;
+
+                    if (newdate in d_lune){
+                        if(d_lune[newdate][0] == '1'){
+
+                            for (var t = 0; t < d_lune[newdate].length; t++){
+                                lune++
+                            }
+                            
+                        }else{
+
+                            for (var t = 0; t < d_lune[newdate].length; t++){
+                                nrml++
+                            }
+
+                        }
+                    }
+                }
+
+                //mettre a jour le graph avec les 2 valeurs
+                myChart.data.labels = ['Pleine Lune','Normal'];
+                myChart.data.datasets[0].data = [lune,nrml];
+                myChart.config.type = 'pie';
+                myChart.options.scales.xAxes[0].gridLines.color = "#FFFFFF";
+                myChart.options.scales.yAxes[0].gridLines.color = "#FFFFFF";
+                myChart.options.scales.xAxes[0].ticks.display = false;
+                myChart.options.scales.yAxes[0].ticks.display = false;
+                myChart.update();
+
+
+            }
+
+            //creer le graph de répartition des races dans la ferme en fct d'un pourcentage
+            function Graphrace(){
+
+            }
+
 
             // met a jour les couleurs du graph
             function updatecolor(color){
@@ -281,6 +416,9 @@
             
             // met a jour le type de graph
             function updatetype_graph(type){
+
+                myChart.options.scales.xAxes[0].ticks.display = false;
+                myChart.options.scales.yAxes[0].ticks.display = false;
 
 
                 myChart.config.type = type;  
