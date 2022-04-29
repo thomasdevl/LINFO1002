@@ -7,7 +7,8 @@ Projet 2  : site avec des graph de vache
 Clone/dowload le repo
 
 ```
-git clone
+git clone https://github.com/thomasdevl/LINFO1002
+cd 
 ```
 
-oui oui
+
