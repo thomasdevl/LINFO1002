@@ -6,8 +6,8 @@ Projet 2  : site avec des graph de vache
 
 Clone/dowload le repo
 
-```python
-a = fromage
+```
+git clone
 ```
 
 oui oui
