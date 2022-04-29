@@ -12,3 +12,12 @@ cd flasktuto
 ```
 
 
+db 
+
+```
+cd
+python3 create_db.py
+cd
+```
+
+
