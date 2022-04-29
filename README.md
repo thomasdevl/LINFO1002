@@ -20,9 +20,14 @@ pip install -r flask
 
 ### Setup la database (déjà fait)
 ```
-cd /flaskr/db
-python3 create_db.py
-cd ..
+python3 /flaskr/dbcreate_db.py
 ```
+
+### lancer le serv
+```
+python 3 /flasktuto/flaskr/__init__.py
+```
+
+Aller sur le site : http://127.0.0.1:5000 
 
 
