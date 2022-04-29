@@ -5,6 +5,8 @@ Projet 2  : site avec des graph de vache
 
 je suis sur mac ducoup sur windows je sais pas comment ca fonctionne 
 
+# POUR MAC
+
 ### Installation et run du projet
 
 Clone/dowload le repo
