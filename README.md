@@ -23,7 +23,7 @@ pip install -r flask
 python3 /flaskr/dbcreate_db.py
 ```
 
-### lancer le serv
+### Lancer le serv
 ```
 python 3 /flasktuto/flaskr/__init__.py
 ```
