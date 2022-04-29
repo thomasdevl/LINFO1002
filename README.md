@@ -8,7 +8,7 @@ Clone/dowload le repo
 
 ```
 git clone https://github.com/thomasdevl/LINFO1002
-cd 
+cd flasktuto
 ```
 
 
