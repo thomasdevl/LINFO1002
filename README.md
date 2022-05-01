@@ -5,7 +5,40 @@ Projet 2  : site avec des graph de vache
 
 # POUR MAC
 
-test pc dimi 
+Clone/dowload le repo
+
+```
+git clone https://github.com/thomasdevl/LINFO1002
+```
+si ca fonctionne pas télécharger directement le zip sur github
+
+
+### lancer un terminal depuis le dossier flaskuto
+
+click droit sur le dossier>services>New terminal at folder
+
+```
+cd flasktuto
+```
+
+### Installation de flask
+
+```
+pip3 install flask
+```
+pour vérifier que flask est bien installer
+
+```
+flask --version
+```
+
+### Lancement du site
+```
+export FLASK_APP=flasktuto
+export FLASK_ENV=development
+flask run
+```
+Aller sur le site : http://127.0.0.1:5000 
 
 
 # POUR WINDOWS
