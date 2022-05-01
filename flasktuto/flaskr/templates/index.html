@@ -4,9 +4,16 @@
     <body>
 
         <div class="info"> 
-            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-        
-            The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham</p>
+            <pre>
+        Ce site de La Ferme des Trois Chênes à été conçu pour pouvoir analyser la base de donnée comprennant toutes les informations sur les vaches de la Ferme.
+    
+        Vous avez le choix entre 3 graphiques différents:
+        - Le <b>Graphique des Naissances</b> vous permet de voir le nombre de naissances sur une période donnée.
+        - L'option <b>Naissances Lunaires</b> vous donne tous les vélages qui ont eu lieu lors d'une pleine lune.
+        - Le graphique sur la <b>Répartition des Races</b> affiche la distribution des races dans la base de données. 
+          Pour ce graphique, vous avez choisissez quelle(s) race(s) vous intéressent ainsi que le pourcentage de <i>pureté</i> de race minimum. 
+          Le graphique affichera alors le nombre de vaches respectant vos critères.
+            </pre>
         </div>
         
         
@@ -17,7 +24,9 @@
 <br>
 
     <div class = graph_but>
+        <div>
         <button class= "bout" onclick="Graphnaissance()">Graphique des Naissances </button>
+    </div>
 
 
         <div class="date">
@@ -40,32 +49,38 @@
     
         </div>
 
-
+        <div class="naissance_lunaire">
         <button class= "bout" onclick="GraphLune()"> Naissances Lunaire </button>
+        </div>
 
     </div>
     <br>
 
     <div class = graph_but>
 
+        <div>
+
         <button class= "bout" onclick="Graphrace()">Répartition des Races </button>
 
-        
-        <p><b>Choix des races :   &nbsp;</b><p> 
-            <div class="Check">
-            <label class="Race">Holstein
-            <input type="checkbox" id="Holstein">
-            <span class="checkmark"></span>
-            </label>
-            <br>
-            <label class="Race">Blanc Bleu Belge
-            <input type="checkbox" id="BBB">
-            <span class="checkmark"></span>
-            </label>
-            <br>
-            <label class="Race">Jersey
-            <input type="checkbox" id="Jersey">
-            <span class="checkmark"></span>
+        </div>
+
+            <div class="Race">
+                <p><b>Choix des races :   &nbsp;</b><p> 
+                <div class="Check">
+                <label class="Race">Holstein
+                <input type="checkbox" id="Holstein">
+                <span class="checkmark"></span>
+                </label>
+                <br>
+                <label class="Race">Blanc Bleu Belge
+                <input type="checkbox" id="BBB">
+                <span class="checkmark"></span>
+                </label>
+                <br>
+                <label class="Race">Jersey
+                <input type="checkbox" id="Jersey">
+                <span class="checkmark"></span>
+            </div>
         </div>
 
         <div class="slidecontainer">
@@ -261,7 +276,7 @@
             data: {        // les données
                 labels: labels,
                 datasets: [{
-                            //label : ['Holstein','Blanc Bleu Belge','Jersey'],    
+                            label : [" "],    
                             backgroundColor: bgColors,
                             fill: false,
                             data: data
@@ -427,8 +442,6 @@
                 //console.log(bbb)
                 //console.log(jersey)
 
-                //lst avec (race,pourcentage)
-
                 race_ferme = [0,0,0]
 
                 for (var i = 0; i < lst_type_pourct.length; i++) {
@@ -436,33 +449,22 @@
                     race_pourct = lst_type_pourct[i].split(' ')
                     race = parseInt(race_pourct[0])
                     pourct = parseInt(race_pourct[1])
-                    //console.log(race_pourct)
-                    //console.log(race)
-                    //console.log(pourct)
 
                     if (holstein == true && race == 1){
-
                         if(slide <= pourct){
-
                             race_ferme[race-1] ++
                         }
                     }
-
                     if (bbb == true && race == 2){
-
                         if(slide <= pourct){
-
                             race_ferme[race-1] ++
                         }
                     }
-
                     if (jersey == true && race == 3){
-
                         if(slide <= pourct){
                             race_ferme[race-1] ++
                         }
                     }
-                    
                 }
 
                 myChart.data.labels = ['Holstein','Bleu Blanc Belge','Jersey'];
