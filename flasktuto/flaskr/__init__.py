@@ -47,6 +47,9 @@ def home():
 	#dico date + lune 
 	d_lune = dico_naiss_lune(naiss)
 
+	#lst avec race et pourcentage
+	lst_type_pourct = fromage.lst_type_pourct()
+
 	fromage.deco()
 
 	graph_data = {
@@ -57,7 +60,8 @@ def home():
 		"naissance" : naiss,
 		"naissance_dico" : d_naiss,
 		"lst_datetype" : lst_datetype,
-		"dico_lune" : d_lune
+		"dico_lune" : d_lune,
+		"lst_type_pourct" :lst_type_pourct
 	}
 
 	return render_template("index.html",graph_data=graph_data) 

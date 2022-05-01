@@ -43,12 +43,6 @@ class data:
                 fam.append(row)
             return fam
 
-    def mort_premat(self):
-        fam = []
-        with self.conn as cursor:
-            for row in cursor.execute("SELECT "):
-                fam.append(row)
-            return fam
 
     def mort_premat_fam(self):
         fam = []
@@ -61,4 +55,10 @@ class data:
     def famille_en_vie(self):
         with self.conn as cursor:
             return cursor.execute("SELECT famille_id FROM animaux, animaux_velages, velages WHERE animaux.mort_ne = 0 AND animaux.decede = 0 AND animaux.id = animaux_velages.animal_id AND velages.id = animaux_velages.velage_id").fetchall()
+
+    def lst_type_pourct(self):
+        with self.conn as cursor:
+            return cursor.execute("SELECT type_id, pourcentage FROM animaux_types").fetchall()
+
+        
     

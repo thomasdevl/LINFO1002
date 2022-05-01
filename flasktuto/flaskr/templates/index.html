@@ -40,17 +40,8 @@
     
         </div>
 
-    
-    </div>
-    <br>
-
-    <div class="graph_but">
-
-        <div class="bout">
 
         <button class= "bout" onclick="GraphLune()"> Naissances Lunaire </button>
-
-        </div>
 
     </div>
     <br>
@@ -63,19 +54,35 @@
         <p><b>Choix des races :   &nbsp;</b><p> 
             <div class="Check">
             <label class="Race">Holstein
-            <input type="checkbox" checked="checked">
+            <input type="checkbox" id="Holstein">
             <span class="checkmark"></span>
             </label>
             <br>
             <label class="Race">Blanc Bleu Belge
-            <input type="checkbox">
+            <input type="checkbox" id="BBB">
             <span class="checkmark"></span>
             </label>
             <br>
             <label class="Race">Jersey
-            <input type="checkbox">
+            <input type="checkbox" id="Jersey">
             <span class="checkmark"></span>
         </div>
+
+        <div class="slidecontainer">
+            <p><b>Pourcentage Minimum</b></p>
+            <input type="range" min="1" max="100" value="50" class="slider" id="race_min">
+            <p> Valeur : <span id="f"></span></p>
+            <script>
+                var slide = document.getElementById("race_min");
+                var y = document.getElementById("f");
+                y.innerHTML = slide.value;
+
+                slide.oninput = function() {
+                    y.innerHTML = this.value
+                }
+                
+            </script>
+          </div>
 
     </div>
         <br>
@@ -166,10 +173,9 @@
             const naiss_dico = '{{ graph_data.naissance_dico }}';
             const lst_datetype = '{{ graph_data.lst_datetype }}';
             const d_lune_pyth = '{{ graph_data.dico_lune }}';
+            const type_pourct = '{{graph_data.lst_type_pourct}}';
 
         
-
-                
             //modif les valeurs en list et les convet en int si nécessaire
             var fam_id_lst_int = fam_id.replace('[', '').replace(']', '').split(",").map(Number);
             var fam_names_lst = fam_names.replace('[', '').replace(']', '').split(",")
@@ -210,16 +216,25 @@
 
             //copie du dic d_lune venu depuis python
             a = d_lune_pyth.replaceAll('&#39;','').replaceAll('{','').replaceAll('}','').replaceAll(' ','').replaceAll(':',',').split(",")
-            console.log(a)
+            //console.log(a)
             d_lune = {}
             for (let i=0; i< a.length; i=i+2 ) {
                     d_lune[a[i]] = a[i+1];
             }
             console.log(d_lune)
 
+            //recree la lst pcq ca fonctionne jamais comme on veut 
+            lst_type_pourct= []
+            b= type_pourct.replaceAll('[','').replaceAll(']','').replaceAll('(','').replaceAll(')','').replaceAll(' ','').split(',')
+            for (let i=0; i< b.length; i=i+2 ) {
+                    c = b[i]+ " "  + b[i+1]
+                    lst_type_pourct.push(c);
+            }
+            //console.log(lst_type_pourct)
 
-            var data =  [12, 19, 3, 5, 2, 3,50,20];
-            var labels = ['Jean', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique','thomas','JEAN'];
+
+            var data =  [12, 19, 3];
+            var labels = ['Holstein','Blanc Bleu Belge','Jersey'];
 
             //var data = fam_id_lst_int
             //var labels = fam_names_lst
@@ -246,8 +261,8 @@
             data: {        // les données
                 labels: labels,
                 datasets: [{
+                            //label : ['Holstein','Blanc Bleu Belge','Jersey'],    
                             backgroundColor: bgColors,
-                            label: 'votes',
                             fill: false,
                             data: data
                         }]
@@ -316,6 +331,8 @@
                     }
                 }
 
+                //faire un dico avec en clé les 3 types et en def list des dates relié au type 
+
                 //comparer les dates avec les familles choisient et baisser de 1 la valeur dans la lst nmb_naissance
                 // aller sur chaque element de jour et si pas dans la liste et pas a zero descendre de 1
                 lst_date_type //lst : [[(date)],[(type pourcentage) (type pourcentage)]]
@@ -326,7 +343,7 @@
                     dico_date_type[lst_datetype[i][0]] = lst_datetype[i][1];
                 }
 
-                console.log(dico_date_type)
+                //console.log(dico_date_type)
 
                 
                 //mettre a jour le graph avec les 2 listes
@@ -368,17 +385,13 @@
 
                     if (newdate in d_lune){
                         if(d_lune[newdate][0] == '1'){
-
                             for (var t = 0; t < d_lune[newdate].length; t++){
                                 lune++
                             }
-                            
                         }else{
-
                             for (var t = 0; t < d_lune[newdate].length; t++){
                                 nrml++
                             }
-
                         }
                     }
                 }
@@ -391,6 +404,7 @@
                 myChart.options.scales.yAxes[0].gridLines.color = "#FFFFFF";
                 myChart.options.scales.xAxes[0].ticks.display = false;
                 myChart.options.scales.yAxes[0].ticks.display = false;
+                //myChart.data.datasets[0].label = ['Pleine Lune','Normal']
                 myChart.update();
 
 
@@ -398,6 +412,67 @@
 
             //creer le graph de répartition des races dans la ferme en fct d'un pourcentage
             function Graphrace(){
+
+
+                //valeur du slider 
+                var slide = document.getElementById("race_min").value;
+
+                // valeur des checkbox True/False en fct 
+                var holstein = document.getElementById("Holstein").checked;  //1
+                var bbb = document.getElementById("BBB").checked;   //2
+                var jersey= document.getElementById("Jersey").checked;  //3
+
+                //console.log(slide)
+                //console.log(holstein)
+                //console.log(bbb)
+                //console.log(jersey)
+
+                //lst avec (race,pourcentage)
+
+                race_ferme = [0,0,0]
+
+                for (var i = 0; i < lst_type_pourct.length; i++) {
+
+                    race_pourct = lst_type_pourct[i].split(' ')
+                    race = parseInt(race_pourct[0])
+                    pourct = parseInt(race_pourct[1])
+                    //console.log(race_pourct)
+                    //console.log(race)
+                    //console.log(pourct)
+
+                    if (holstein == true && race == 1){
+
+                        if(slide <= pourct){
+
+                            race_ferme[race-1] ++
+                        }
+                    }
+
+                    if (bbb == true && race == 2){
+
+                        if(slide <= pourct){
+
+                            race_ferme[race-1] ++
+                        }
+                    }
+
+                    if (jersey == true && race == 3){
+
+                        if(slide <= pourct){
+                            race_ferme[race-1] ++
+                        }
+                    }
+                    
+                }
+
+                myChart.data.labels = ['Holstein','Bleu Blanc Belge','Jersey'];
+                myChart.data.datasets[0].data = race_ferme;
+                updatetype_graph('pie')
+                myChart.options.scales.xAxes[0].gridLines.color = "#FFFFFF";
+                myChart.options.scales.yAxes[0].gridLines.color = "#FFFFFF";
+                myChart.options.scales.xAxes[0].ticks.display = false;
+                myChart.options.scales.yAxes[0].ticks.display = false;
+                myChart.update();
 
             }
 
