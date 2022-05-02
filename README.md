@@ -68,6 +68,11 @@ python flaskr/__init__.py
 
 Aller sur le site : http://127.0.0.1:5000 
 
+# En cas de soucis
+
+Si le site ne se lance pas des sceenshots avec explication du site sont disponibles:
+LINFO1002/flasktuto/screen/Screen_avec_explication.pdf
+
 # Arborecense des fichiers
 
 ```
