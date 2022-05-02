@@ -31,9 +31,13 @@ pip3 install flask
 
 ```
 cd flasktuto
-export FLASK_APP=flasktuto
-export FLASK_ENV=development
 cd flaskr
+export FLASK_APP=__init__.py
+```
+
+```
+flask run 
+OU
 python3 __init__.py
 ```
 Aller sur le site : http://127.0.0.1:5000 
