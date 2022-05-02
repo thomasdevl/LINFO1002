@@ -45,22 +45,34 @@ Aller sur le site : http://127.0.0.1:5000
 
 Clone/dowload le repo
 
+pre : avoir installer git
+      avoir python 
+
 ```
 git clone https://github.com/thomasdevl/LINFO1002
 cd flasktuto
+cd flaskr
 ```
-le terminal doit se situer sur le dossier tutoflaskr
+si ca ne fonctionne pas télécharger directement le zip sur github
 
+### Venv
+
+```
 py -3 -m venv venv
+.\venv\Scripts\activate
+```
+(venv) devrait apparaître 
 
 ### Instalation de Flask
+
 ```
 pip install flask
 ```
 
 ### Lancer le serv
+
 ```
-python flaskr/__init__.py
+python __init__.py
 ```
 
 Aller sur le site : http://127.0.0.1:5000 
