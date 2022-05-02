@@ -1,5 +1,5 @@
 # LINFO1002
-Projet 2  : site avec des graph de vache
+Projet 2  : site avec des graphiques de vache
 
 ## A faire dans l'ordre:
 
