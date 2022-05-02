@@ -5,7 +5,41 @@ Projet 2  : site avec des graph de vache
 
 # POUR MAC
 
-test pc dimi 
+Clone/dowload le repo
+
+```
+git clone https://github.com/thomasdevl/LINFO1002
+```
+si ca ne fonctionne pas télécharger directement le zip sur github
+
+
+### Lancer un terminal depuis le dossier flaskuto
+
+click droit sur le dossier>services>New terminal at folder
+
+```
+cd flasktuto
+```
+
+### Installation de flask
+
+```
+pip3 install flask
+```
+Pour vérifier que flask est bien installer :
+
+```
+flask --version
+```
+
+### Lancement du site
+
+```
+export FLASK_APP=flasktuto
+export FLASK_ENV=development
+flask run
+```
+Aller sur le site : http://127.0.0.1:5000 
 
 
 # POUR WINDOWS
@@ -33,5 +67,33 @@ python flaskr/__init__.py
 ```
 
 Aller sur le site : http://127.0.0.1:5000 
+
+# Arborecense des fichiers
+
+```
+LINFO1002
+├──flasktuto
+│  └──flaskr
+│      ├── __init__.py
+│      ├── moon.py
+│      ├── db
+│      │    ├── 1002-sql-data
+│      │    ├── create_db.py
+│      │    ├── create_db.sql
+│      │    ├── dat.py
+│      │    ├── database.sqlite
+│      │    └── heritage.py
+│      ├── static
+│      │    ├── style.css
+│      │    └── + des photos de vaches
+│      ├── templates
+│      │    ├── about.html
+│      │    ├── base.html
+│      │    └── index.html
+│      └── __pycache__
+├──LICENSE
+└──README.md
+
+```
 
 
