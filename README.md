@@ -45,8 +45,7 @@ Aller sur le site : http://127.0.0.1:5000
 
 Clone/dowload le repo
 
-pre : avoir installer git
-      avoir python 
+pre : avoir installer git et python
 
 ```
 git clone https://github.com/thomasdevl/LINFO1002
