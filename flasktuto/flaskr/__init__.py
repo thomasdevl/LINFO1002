@@ -20,15 +20,14 @@ def home():
 	#famille 
 	fam = fromage.familles()
 
-
+	#lst avec les id des vaches
 	fam_id = []
 	for f in fam:
 		fam_id.append(f[0])
-
+	#lst avec les noms des vaches
 	fam_names = []
 	for f in fam:
 		fam_names.append(f[1].strip())
-
 
 	#famille en vie 
 	fam_en_v = fromage.famille_en_vie()
@@ -70,7 +69,6 @@ def home():
 @app.route("/about")
 def about():
 	return render_template("about.html")
-
 
 
 if __name__ == "__main__":

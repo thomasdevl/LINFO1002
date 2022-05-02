@@ -89,14 +89,13 @@
             <input type="range" min="1" max="100" value="50" class="slider" id="race_min">
             <p> Valeur : <span id="f"></span></p>
             <script>
+                //modif le texte (Valeur : %% )en fct du slider
                 var slide = document.getElementById("race_min");
                 var y = document.getElementById("f");
                 y.innerHTML = slide.value;
-
                 slide.oninput = function() {
                     y.innerHTML = this.value
                 }
-                
             </script>
           </div>
 
@@ -237,7 +236,8 @@
             for (let i=0; i< a.length; i=i+2 ) {
                     d_lune[a[i]] = a[i+1];
             }
-            console.log(d_lune)
+            //console.log(d_lune)
+            console.log(":)") //hello 
 
             //recree la lst pcq ca fonctionne jamais comme on veut 
             lst_type_pourct= []
@@ -248,20 +248,9 @@
             }
             //console.log(lst_type_pourct)
 
-
+            //var de base du graph
             var data =  [12, 19, 3];
             var labels = ['Holstein','Blanc Bleu Belge','Jersey'];
-
-            //var data = fam_id_lst_int
-            //var labels = fam_names_lst
-
-
-            //console.log(fam_names[0])
-            //console.log(fam_id_lst_int);
-            //console.log(fam_id_lst_int[0]);
-            //console.log(Array.isArray(fam_id_lst_int)); 
-
-            //console.log(fam_names)
 
             //repète les couleurs pour la palette 
             var colors = ['rgb(98, 131, 149)','rgb(150, 137, 123)','rgb(223, 213, 165)','rgb(219, 173, 106)','rgb(207, 153, 95)'];
@@ -271,6 +260,7 @@
                 bgColors.push(colors[i % colors.length]);  
             }
 
+            //création du graph de base 
             const ctx = document.getElementById('graphique').getContext('2d');
             window.myChart = new Chart(ctx, {
             type: ['bar'],   // le type du graphique
@@ -308,9 +298,6 @@
                 var date_start = document.getElementById("start").value;
                 var date_stop = document.getElementById("stop").value;
 
-                //console.log(date_start)
-                //console.log(date_stop)
-
                 //creer une liste avec tous les jours entre les deux dates
                 var getDaysArray = function(start, end) {
                     for(var arr=[],dt=new Date(start); dt<=new Date(end); dt.setDate(dt.getDate()+1)){
@@ -320,12 +307,9 @@
                 };
 
                 var date_lst = getDaysArray(new Date(date_start),new Date(date_stop));
-                //console.log(date_lst);
 
-                
+
                 //reg dans le dico si c'est dedans et creer une nouvelle liste avec le nombre de naissance par jour 
-                
-                //naiss_dic
                 var nmb_naissance =[];
                 var jour = [];
 
@@ -429,7 +413,6 @@
             //creer le graph de répartition des races dans la ferme en fct d'un pourcentage
             function Graphrace(){
 
-
                 //valeur du slider 
                 var slide = document.getElementById("race_min").value;
 
@@ -438,13 +421,10 @@
                 var bbb = document.getElementById("BBB").checked;   //2
                 var jersey= document.getElementById("Jersey").checked;  //3
 
-                //console.log(slide)
-                //console.log(holstein)
-                //console.log(bbb)
-                //console.log(jersey)
 
                 race_ferme = [0,0,0]
-
+                
+                //incrementer de 1 la lst race_ferme en fct de la race de la vache et des % du slider
                 for (var i = 0; i < lst_type_pourct.length; i++) {
 
                     race_pourct = lst_type_pourct[i].split(' ')
@@ -468,6 +448,8 @@
                     }
                 }
 
+
+                //mettre a jour le graph
                 myChart.data.labels = ['Holstein','Bleu Blanc Belge','Jersey'];
                 myChart.data.datasets[0].data = race_ferme;
                 updatetype_graph('pie')
@@ -482,12 +464,11 @@
 
             // met a jour les couleurs du graph
             function updatecolor(color){
-                var col = []
 
+                var col = []
                 for (var i = 0; i < myChart.data.datasets[0].data.length; i++) {
                     col.push(color[i % color.length]);  
                 }
-            
                 myChart.data.datasets[0].backgroundColor = col;
                 myChart.update();
             }
@@ -497,8 +478,6 @@
 
                 myChart.options.scales.xAxes[0].ticks.display = false;
                 myChart.options.scales.yAxes[0].ticks.display = false;
-
-
                 myChart.config.type = type;  
 
                 if(type == 'polarArea' || type == 'pie' || type == 'radar'){
@@ -518,7 +497,6 @@
                 myChart.update();
             }
         </script> 
-
     </div>
        
     

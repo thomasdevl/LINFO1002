@@ -30,10 +30,10 @@ def moon_phase(date):
     return status
 
 def dico_naiss_lune(naiss):
-
-    #return : dictionnaire avec la date en clé et en fct du 
-    # jour le nmbr de vache en pleine lune 1 et en période normale 0
-
+    '''
+    Pre: liste avec les naissances au format dd/mm/yyyy
+    Post: un dictionnaire avec en key la date et en def le nombre de naissance en période lunaire(1) ou en période normalle(0)
+    '''
 
     moon = {}
     nbr = ""
