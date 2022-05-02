@@ -73,24 +73,25 @@ Aller sur le site : http://127.0.0.1:5000
 ```
 LINFO1002
 ├──flasktuto
-│  └──flaskr
-│      ├── __init__.py
-│      ├── moon.py
-│      ├── db
-│      │    ├── 1002-sql-data
-│      │    ├── create_db.py
-│      │    ├── create_db.sql
-│      │    ├── dat.py
-│      │    ├── database.sqlite
-│      │    └── heritage.py
-│      ├── static
-│      │    ├── style.css
-│      │    └── + des photos de vaches
-│      ├── templates
-│      │    ├── about.html
-│      │    ├── base.html
-│      │    └── index.html
-│      └── __pycache__
+│  ├──flaskr
+│  │   ├── __init__.py
+│  │   ├── moon.py
+│  │   ├── db
+│  │   │    ├── 1002-sql-data
+│  │   │    ├── create_db.py
+│  │   │    ├── create_db.sql
+│  │   │    ├── dat.py
+│  │   │    ├── database.sqlite
+│  │   │    └── heritage.py
+│  │   ├── static
+│  │   │    ├── style.css
+│  │   │    └── + des photos de vaches
+│  │   ├── templates
+│  │   │    ├── about.html
+│  │   │    ├── base.html
+│  │   │    └── index.html
+│  │   └── __pycache__
+│  └── screen
 ├──LICENSE
 └──README.md
 
