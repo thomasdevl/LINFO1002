@@ -92,27 +92,27 @@ Si vous avez encore des questions : Thomas_devl#1198(discord)
 ```
 LINFO1002
 ├──flasktuto
-│  ├──flaskr
-│  │   ├── __init__.py
-│  │   ├── moon.py
-│  │   ├── db
-│  │   │    ├── 1002-sql-data
-│  │   │    ├── create_db.py
-│  │   │    ├── create_db.sql
-│  │   │    ├── dat.py
-│  │   │    ├── database.sqlite
-│  │   │    └── heritage.py
-│  │   ├── static
+│  ├──flaskr //dossier principal du site
+│  │   ├── __init__.py //fichier de lancement 
+│  │   ├── moon.py //calcul les dates de pleine lune
+│  │   ├── db  // dossier pour la database
+│  │   │    ├── 1002-sql-data //fichiers pour remplir la database
+│  │   │    ├── create_db.py //Programme python qui crée la database et rajoute les éléments dedans
+│  │   │    ├── create_db.sql //template de la databse
+│  │   │    ├── dat.py //class py qui permet de se connecter à la database et prendre des données
+│  │   │    ├── database.sqlite //la database
+│  │   │    └── heritage.py //Programme python qui calcul l'héritage génétique de chaque vache et le rajoute à la database
+│  │   ├── static //tous les fichiers statiques
 │  │   │    ├── style.css
 │  │   │    └── + des photos de vaches
 │  │   ├── templates
-│  │   │    ├── about.html
-│  │   │    ├── base.html
-│  │   │    └── index.html
+│  │   │    ├── about.html //partie about du site
+│  │   │    ├── base.html //base du side sidebar et titre
+│  │   │    └── index.html //la home page + Tout ce qui crée les graphs en Javascript
 │  │   └── __pycache__
 │  └── screen
 │      ├── Screen_avec_explication.pdf
-│      └── + screenshot du site
+│      └── + screenshot du site // /!\ A lire si le site ne se lance pas 
 ├──LICENSE
 └──README.md
 ```
