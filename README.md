@@ -13,31 +13,28 @@ git clone https://github.com/thomasdevl/LINFO1002
 si ca ne fonctionne pas télécharger directement le zip sur github
 
 
-### Lancer un terminal depuis le dossier flaskuto
-
-click droit sur le dossier>services>New terminal at folder
+### Lancer un terminal depuis le dossier LINFO1002
 
 ```
-cd flasktuto
+cd LINFO1002
 ```
 
 ### Installation de flask
 
-```
-pip3 install flask
-```
-Pour vérifier que flask est bien installer :
+pre : avoir python => aller le télécharger sur le site officiel 
 
 ```
-flask --version
+pip3 install flask
 ```
 
 ### Lancement du site
 
 ```
+cd flasktuto
 export FLASK_APP=flasktuto
 export FLASK_ENV=development
-flask run
+cd flaskr
+python3 __init__.py
 ```
 Aller sur le site : http://127.0.0.1:5000 
 
