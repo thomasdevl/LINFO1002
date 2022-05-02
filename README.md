@@ -97,9 +97,10 @@ LINFO1002
 │  │   │    └── index.html
 │  │   └── __pycache__
 │  └── screen
+│      ├── Screen_avec_explication.pdf
+│      └── + screenshot du site
 ├──LICENSE
 └──README.md
-
 ```
 
 
