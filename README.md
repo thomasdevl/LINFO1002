@@ -1,4 +1,4 @@
-![GitHub Contributors Image](https://contrib.rocks/image?repo=Your_GitHub_Username/Your_GitHub_Repository_Name)
+![GitHub Contributors Image](https://contrib.rocks/image?repo=thomasdevl/LINFO1002)
 
 
 # LINFO1002
