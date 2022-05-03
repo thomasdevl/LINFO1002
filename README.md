@@ -1,9 +1,3 @@
-![GitHub Contributors Image](https://contrib.rocks/image?repo=thomasdevl/LINFO1002)
-
-![Your Repository's Stats](https://github-readme-stats.vercel.app/api/top-langs/?username=thomasdevl&theme=blue-green)
-
-
-
 # LINFO1002
 Projet 2  : site avec des graphiques de vache
 
