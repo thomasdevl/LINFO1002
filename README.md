@@ -1,3 +1,6 @@
+![GitHub Contributors Image](https://contrib.rocks/image?repo=Your_GitHub_Username/Your_GitHub_Repository_Name)
+
+
 # LINFO1002
 Projet 2  : site avec des graphiques de vache
 
