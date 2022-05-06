@@ -2,11 +2,13 @@
 {% block content %}
 <div class="main"> 
     <body>
-        <div class="info"> <p>
+        <div class="info"> 
             <br>
         <pre>
+            
             Vous voulez en savoir plus sur la Ferme des Trois Chênes ? Vous êtes au bon endroit !
             Vous trouverez ici toutes les informations à propos de la Ferme.
+            
 
             <u><b style="color:forestgreen;">Date de création :</b></u>
             
@@ -44,16 +46,17 @@
             <u><b style="color:forestgreen;">Quelques Stars de la Ferme des Trois Chênes :</b></u>
             
             <img src="{{url_for('static',filename ='vache1.jpeg')}}" alt="Séloni, membre de la Ferme des Trois Chênes">
-            <img src="{{url_for('static',filename ='vache2.jpeg')}}" alt="Snoeloni 7/8 Jersey, avec son 1er petit veau">
+            Séloni, membre de la Ferme des Trois Chênes
+            <br>
             <img src="{{url_for('static',filename ='vache3.jpeg')}}" alt="Swimilloni (milieu), 3/4 Jersey, avec deux autres vache 100% Holstein">
+            Swimilloni (milieu), 3/4 Jersey, avec deux autres vache 100% Holstein
             
             <u><b style="color:forestgreen;">Les créateurs du site :</b></u>
             
             Thomas Devlamminck
             Akkelyn de Groot
 
-        </pre> 
-        </p>        
+        </pre>     
     </body>
 </div>
 {% endblock %}

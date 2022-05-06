@@ -43,11 +43,23 @@ class data:
                 lst.append(f"{date}${a}!")
         return lst
 
+    def fam_naissance(self,lst_date):
+        '''
+        Pre: une liste de date en format dd/mm/yyyy
+        Post: une liste avec la date de naissance et la famille
+        en format : [date $ (famille,)!]
+        '''
+        lst = []
+        for date in lst_date:
+            with self.conn as cursor:
+                a = cursor.execute("SELECT animaux.famille_id FROM animaux,velages,animaux_velages WHERE velages.date = ? AND velages.id = animaux_velages.velage_id AND animaux_velages.animal_id = animaux.id",(date)).fetchall()
+                lst.append(f"{date}${a}!")
+        return lst
+
     def familles(self):
         '''
         Post: une liste avec toutes les familles
         '''
-        #[date $ (type,pourcentage)!]
         #liste avec toutes les familles 
         fam = []
         with self.conn as cursor:
