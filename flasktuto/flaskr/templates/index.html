@@ -5,15 +5,17 @@
 
         <div class="info"> 
             <pre>
-        Ce site de La Ferme des Trois Chênes à été conçu pour pouvoir analyser la base de donnée comprennant toutes les informations sur les vaches de la Ferme.
-    
-        Vous avez le choix entre 3 graphiques différents:
-        - Le <b>Graphique des Naissances</b> vous permet de voir le nombre de naissances sur une période donnée.
-        - Le <b>Graphique des Naissances Lunaires</b> vous donne tous les vélages qui ont eu lieu en période de pleine lune et ceux en temps normal. 
-          Il se base aussi sur les dates de début et de fin.
-        - Le graphique sur la <b>Répartition des Races</b> affiche la distribution des races dans la base de données. 
-          Pour ce graphique, vous avez choisissez quelle(s) race(s) vous intéressent ainsi que le pourcentage de <i>pureté</i> de race minimum. 
-          Le graphique affichera alors le nombre de vaches respectant vos critères.
+            Ce site de La Ferme des Trois Chênes a été conçu pour pouvoir analyser la base de données comprenant toutes les informations sur les vaches de la Ferme.
+
+            Vous avez le choix entre 3 graphiques différent :
+            - Le <b>Graphique des Naissances</b> vous permet de voir le nombre de naissances sur une période donnée.
+            - Le <b>Graphique des Naissances Lunaires</b> vous donne tous les vêlages qui ont eu lieu en période de pleine lune et ceux en temps normal.
+            Il se base aussi sur les dates de début et de fin.
+            - Le graphique sur <b>la Répartition des Races</b> affiche la distribution des races dans la base de données.
+            Pour ce graphique, vous avez choisissez quelle (s) race (s) vous intéressent ainsi que le pourcentage de <i>pureté</i> de race minimum.
+            Le graphique affichera alors le nombre de vaches respectant vos critères.
+            
+            Si des graphiques se superposent, il suffit de recharger la page et tout sera réglé.
             </pre>
         </div>
         
@@ -43,7 +45,7 @@
 
     <form>
         <label for="famille">Choisir une famille(optionnel):</label>
-        <select name="famille" id="famille">
+        <select id="54FE3256">
             <option value="0" selected>--None--</option>
             <option value="134">Margueritte</option>
             <option value="45">Jonquille</option>
@@ -357,9 +359,7 @@
             const familles = '{{graph_data.familles}}';
 
 
-            console.log(familles.replaceAll('&#39;',''))
-            console.log(lst_datefam.replaceAll('&#34;','').replaceAll('&#39;','').replaceAll(',','').replaceAll('[','').replaceAll(']','').replaceAll('(','').replaceAll(')','').split('!'))
-
+            
         
             //modif les valeurs en list et les convet en int si nécessaire
             var fam_id_lst_int = fam_id.replace('[', '').replace(']', '').split(",").map(Number);
@@ -420,6 +420,19 @@
 
 
             //lst avec famille_id, date_velage 
+            //console.log(familles.replaceAll('&#39;',''))
+            aa = lst_datefam.replaceAll('&#34;','').replaceAll('&#39;','').replaceAll(',','').replaceAll('[','').replaceAll(']','').replaceAll('(','').replaceAll(')','').split('!')
+            lst_date_fam = []
+            for (let i=0; i< aa.length; i++ ) {
+                    c = aa[i].split("$")
+                    lst_date_fam.push(c);
+            }
+            d_datefam = {}  //dico avec la date en clé et les familles qui ont eu un enfant ce jour la en déf
+            for (let i=0; i< lst_date_fam.length; i++ ) {
+                    d_datefam[lst_date_fam[i][0].replaceAll(' ','')] = lst_date_fam[i][1];
+            }
+            
+
 
             //var de base du graph
             var data =  [12, 19, 3];
@@ -464,8 +477,17 @@
             );
             };
 
+            
+
             //creer le graph avec le nombre de naissance par jour en fct de la date
             function Graphnaissance(){
+
+                //choix de famille optionnel
+                var e = document.getElementById("54FE3256");
+                var user_fam = e.value;
+                //console.log(user_fam);
+                //console.log(d_datefam)
+                //console.log(naiss_dic)
 
                 //recup les dates input par le user
                 var date_start = document.getElementById("start").value;
@@ -496,29 +518,44 @@
                     newdate = day + "/" + month + "/" + year;
 
                     if (newdate in naiss_dic){
-                        nmb_naissance.push(naiss_dic[newdate])
-                        jour.push(newdate)
+
+                        //si le user a pas choisi de famille particulière
+                        if (user_fam == 0){
+                            
+                            nmb_naissance.push(naiss_dic[newdate])
+                            jour.push(newdate)
+
+                        }else{
+
+                            if (newdate in d_datefam){
+
+                                var lst_naiss_fam = d_datefam[newdate].split(" ")
+
+                                for (var a = 0; a < lst_naiss_fam.length; a++) {
+
+                                    if (lst_naiss_fam[a] == user_fam){
+                                        nmb_naissance.push(1)
+                                        jour.push(newdate)
+                                    }else{
+                                        nmb_naissance.push(0)
+                                        jour.push(newdate)
+                                    }
+                                }
+
+                            }else{
+                                nmb_naissance.push(0)
+                                jour.push(newdate)
+                            }
+                        }
+                        
                     }else{
                         nmb_naissance.push(0)
                         jour.push(newdate)
                     }
                 }
 
-                //faire un dico avec en clé les 3 types et en def list des dates relié au type 
-
-                //comparer les dates avec les familles choisient et baisser de 1 la valeur dans la lst nmb_naissance
-                // aller sur chaque element de jour et si pas dans la liste et pas a zero descendre de 1
-                lst_date_type //lst : [[(date)],[(type pourcentage) (type pourcentage)]]
-
-                //création d'un dico avec la date en clé et les type et % en déf
-                dico_date_type = {}
-                for (var i = 0; i < lst_date_type.length; i++) {
-                    dico_date_type[lst_datetype[i][0]] = lst_datetype[i][1];
-                }
-
-                //console.log(dico_date_type)
-
                 
+
                 //mettre a jour le graph avec les 2 listes
                 myChart.data.labels = jour;
                 myChart.data.datasets[0].data = nmb_naissance;
@@ -528,6 +565,10 @@
 
             //naissance lunaire en fct de la date choisi
             function GraphLune(){
+
+                //choix de famille optionnel
+                var e = document.getElementById("54FE3256");
+                var user_fam = e.value;
 
                 //recup les dates input par le user
                 var date_start = document.getElementById("start").value;
@@ -557,13 +598,39 @@
                     newdate = day + "/" + month + "/" + year;
 
                     if (newdate in d_lune){
-                        if(d_lune[newdate][0] == '1'){
-                            for (var t = 0; t < d_lune[newdate].length; t++){
-                                lune++
+
+                        //si le user a pas choisi de famille particulière
+                        if (user_fam == 0){
+                            if(d_lune[newdate][0] == '1'){
+                                for (var t = 0; t < d_lune[newdate].length; t++){
+                                    lune++
+                                }
+                            }else{
+                                for (var t = 0; t < d_lune[newdate].length; t++){
+                                    nrml++
+                                }
                             }
                         }else{
-                            for (var t = 0; t < d_lune[newdate].length; t++){
-                                nrml++
+
+                            if (newdate in d_datefam){
+
+                                var lst_naiss_fam = d_datefam[newdate].split(" ")
+
+                                for (var a = 0; a < lst_naiss_fam.length; a++) {
+
+                                    if (lst_naiss_fam[a] == user_fam){
+
+                                        if(d_lune[newdate][0] == '1'){
+                                            for (var t = 0; t < d_lune[newdate].length; t++){
+                                                lune++
+                                            }
+                                        }else{
+                                            for (var t = 0; t < d_lune[newdate].length; t++){
+                                                nrml++
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -625,11 +692,7 @@
                 //mettre a jour le graph
                 myChart.data.labels = ['Holstein','Bleu Blanc Belge','Jersey'];
                 myChart.data.datasets[0].data = race_ferme;
-                updatetype_graph('pie')
-                myChart.options.scales.xAxes[0].gridLines.color = "#FFFFFF";
-                myChart.options.scales.yAxes[0].gridLines.color = "#FFFFFF";
-                myChart.options.scales.xAxes[0].ticks.display = false;
-                myChart.options.scales.yAxes[0].ticks.display = false;
+                updatetype_graph('bar')
                 myChart.update();
 
             }
