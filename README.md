@@ -95,6 +95,7 @@ LINFO1002
 │  ├──flaskr //dossier principal du site
 │  │   ├── __init__.py //fichier de lancement 
 │  │   ├── moon.py //calcul les dates de pleine lune
+│  │   ├── test.py //test unitaire pour la fonction des cycles lunaire et de la class data
 │  │   ├── db  // dossier pour la database
 │  │   │    ├── 1002-sql-data //fichiers pour remplir la database
 │  │   │    ├── create_db.py //Programme python qui crée la database et rajoute les éléments dedans
