@@ -14,6 +14,8 @@
             - Le graphique sur <b>la Répartition des Races</b> affiche la distribution des races dans la base de données.
             Pour ce graphique, vous avez choisissez quelle (s) race (s) vous intéressent ainsi que le pourcentage de <i>pureté</i> de race minimum.
             Le graphique affichera alors le nombre de vaches respectant vos critères.
+
+            Vous pouvez utiliser le bouton "<b>Settings</b>" pour changer le type de graphique ainsi que la palette de couleur du graphe.
             
             Si des graphiques se superposent, il suffit de recharger la page et tout sera réglé.
             </pre>
@@ -21,7 +23,6 @@
         
         
     <h2> <center><u>________________________________________________________________________</u> </center></h2>
-    <br>
 <br>
 <br>
         <div class = graph_but>
@@ -359,9 +360,8 @@
             const familles = '{{graph_data.familles}}';
 
 
-            
-        
-            //modif les valeurs en list et les convet en int si nécessaire
+
+            //modif les valeurs en list et les convert en int si nécessaire
             var fam_id_lst_int = fam_id.replace('[', '').replace(']', '').split(",").map(Number);
             var fam_names_lst = fam_names.replace('[', '').replace(']', '').split(",")
 
@@ -384,7 +384,6 @@
             for (var i = 0; i < lst_clean.length; i++) {
                 lst_date_type.push(lst_clean[i].split("$"));  
             }
-            //console.log(lst_date_type)
 
             //création d'un dico avec la date en clé et les type et % en déf
             dico_date_type = {}
@@ -395,18 +394,13 @@
                 } 
             }
 
-            //console.log(dico_date_type)
-            //console.log(naiss_dic)
-
-
             //copie du dic d_lune venu depuis python
             a = d_lune_pyth.replaceAll('&#39;','').replaceAll('{','').replaceAll('}','').replaceAll(' ','').replaceAll(':',',').split(",")
-            //console.log(a)
             d_lune = {}
             for (let i=0; i< a.length; i=i+2 ) {
-                    d_lune[a[i]] = a[i+1];
+                d_lune[a[i]] = a[i+1];
             }
-            //console.log(d_lune)
+            console.log(d_lune)
             console.log(":)") //hello 
 
             //recree la lst pcq ca fonctionne jamais comme on veut 
@@ -416,11 +410,8 @@
                     c = b[i]+ " "  + b[i+1]
                     lst_type_pourct.push(c);
             }
-            //console.log(lst_type_pourct)
-
 
             //lst avec famille_id, date_velage 
-            //console.log(familles.replaceAll('&#39;',''))
             aa = lst_datefam.replaceAll('&#34;','').replaceAll('&#39;','').replaceAll(',','').replaceAll('[','').replaceAll(']','').replaceAll('(','').replaceAll(')','').split('!')
             lst_date_fam = []
             for (let i=0; i< aa.length; i++ ) {
@@ -432,7 +423,6 @@
                     d_datefam[lst_date_fam[i][0].replaceAll(' ','')] = lst_date_fam[i][1];
             }
             
-
 
             //var de base du graph
             var data =  [12, 19, 3];
@@ -485,9 +475,6 @@
                 //choix de famille optionnel
                 var e = document.getElementById("54FE3256");
                 var user_fam = e.value;
-                //console.log(user_fam);
-                //console.log(d_datefam)
-                //console.log(naiss_dic)
 
                 //recup les dates input par le user
                 var date_start = document.getElementById("start").value;
@@ -526,13 +513,9 @@
                             jour.push(newdate)
 
                         }else{
-
                             if (newdate in d_datefam){
-
                                 var lst_naiss_fam = d_datefam[newdate].split(" ")
-
                                 for (var a = 0; a < lst_naiss_fam.length; a++) {
-
                                     if (lst_naiss_fam[a] == user_fam){
                                         nmb_naissance.push(1)
                                         jour.push(newdate)
@@ -541,20 +524,16 @@
                                         jour.push(newdate)
                                     }
                                 }
-
                             }else{
                                 nmb_naissance.push(0)
                                 jour.push(newdate)
                             }
                         }
-                        
                     }else{
                         nmb_naissance.push(0)
                         jour.push(newdate)
                     }
                 }
-
-                
 
                 //mettre a jour le graph avec les 2 listes
                 myChart.data.labels = jour;
@@ -732,6 +711,7 @@
 
                 myChart.update();
             }
+        
         </script> 
     </div>
     </body>

@@ -31,7 +31,7 @@ def moon_phase(date):
 
 def dico_naiss_lune(naiss):
     '''
-    Pre: liste avec les naissances au format dd/mm/yyyy
+    Pre: liste de tuple avec les naissances au format dd/mm/yyyy
     Post: un dictionnaire avec en key la date et en def le nombre de naissance en période lunaire(1) ou en période normalle(0)
     '''
 
