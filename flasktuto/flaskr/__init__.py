@@ -4,8 +4,8 @@ import sqlite3
 
 from flask import Flask, redirect , url_for, render_template
 
-from flaskr.db.dat import data
-from flaskr.moon import dico_naiss_lune
+from db.dat import data
+from moon import dico_naiss_lune
 
 app = Flask(__name__)
 
