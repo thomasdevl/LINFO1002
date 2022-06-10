@@ -1,6 +1,9 @@
 # LINFO1002
 Projet 2  : site avec des graphiques de vache
 
+![home1](https://user-images.githubusercontent.com/91684310/173068888-43e1721f-483b-44f9-a7f2-36053bebef3c.png)
+![home2](https://user-images.githubusercontent.com/91684310/173068893-19342377-8ed3-4fe2-a9d3-a99a850a92a1.png)
+
 ## A faire dans l'ordre:
 
 # POUR MAC
